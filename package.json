@@ -1,13 +1,13 @@
 {
   "name": "discord-easy-dashboard",
   "version": "1.0.0",
-  "description": "",
+  "description": "💻 Complete framework to facilitate the creation of dashboard using discord.js and express",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["discord.js", "discord", "dashboard", "discord-dashboard", "discord-easy-dashboard"],
+  "author": "Simon Leclère",
   "license": "ISC",
   "dependencies": {
     "btoa": "^1.2.1",
