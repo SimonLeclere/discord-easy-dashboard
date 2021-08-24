@@ -18,7 +18,7 @@ client.on('ready', () => {
         serverUrl: 'https://discord.gg/zmqyPu2qkc',
         baseUrl: 'http://localhost',
         port: 80,
-        secret: '',
+        secret: '_2NmYLOsVd1wbgvJteyGq-N5zeSaDoJY',
         logRequests: true
     });
     client.dashboard.registerCommand('ping', 'Get the bot ping', '!ping');
@@ -37,4 +37,4 @@ client.on('messageCreate', message => {
     if (message.content.startsWith('!getprefix')) message.reply(client.prefix);
 });
 
-client.login('');
+client.login('NzIwNzQ5NjI4OTE5Nzc1Mjgy.XuKgZg.DY9uj2jnAlUGzsWQglISZWg0Afs');
