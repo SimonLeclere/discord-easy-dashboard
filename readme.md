@@ -19,9 +19,11 @@ A dashboard is a very popular feature for Discord bots users as it allows them t
 ## Installation
 
 ```js
-npm install discord-dashboard
+npm install discord-easy-dashboard
 ```
 
 ## Documentation
 
 To quickly understand how to use the module, you can read [Getting Started](/docs/gettingStarted.md).
+
+I will post a more complete example and screenshots soon :)
