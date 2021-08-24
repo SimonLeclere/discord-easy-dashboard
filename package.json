@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonLeclere/discord-easy-dashboard.git"
+  },
   "keywords": [
     "discord.js",
     "discord",
