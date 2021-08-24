@@ -1,6 +1,6 @@
-# Discord Dashboard
+# Discord easy Dashboard
 
-Discord Dashboard is a powerful [Node.js](https://nodejs.org) module that allows you to easily create a Dashboard for your bot !
+Discord easy Dashboard is a powerful [Node.js](https://nodejs.org) module that allows you to easily create a Dashboard for your bot !
 
 If you have an idea or a problem, don't hesitate to open an issue :)
 
