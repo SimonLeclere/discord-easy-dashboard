@@ -12,16 +12,17 @@ class Dashboard extends EventEmitter {
 		if (!client) throw new Error('Client is a required parameter.');
         this.client = client;
 
-		if(!client.isReady()) throw new Error('The discord client is not ready. Try to create the Dashboard instance in the "ready" event.')
-
+		
         this.app = express();
         
         this.details = {
-            name: options.name || client.user.username,
+			name: options.name || client.user.username || null,
             description: options.description || null,
 			serverUrl: options.serverUrl || null
         };
 
+		if(!client.isReady()) client.on('ready', () => this.details.name = this.details.name === null ? this.client.user.username : this.details.name)
+		
 		this._commands = [];
 		this._settings = [];
         
@@ -32,7 +33,7 @@ class Dashboard extends EventEmitter {
             logRequests: options.logRequests || false
         };
         
-        if(!this.config.secret) console.warn('Without the client.secret parameter, some features of discord-dashboard will be disabled, like Discord authentification or guild settings...');
+        if(!this.config.secret) console.warn('Without the client.secret parameter, some features of discord-easy-dashboard will be disabled, like Discord authentification or guild settings...');
         
         this._setup();
         this._loadRoutes();
@@ -55,7 +56,7 @@ class Dashboard extends EventEmitter {
         }
     
 		this.app.use(session({
-			secret: `discord-dashboard-${Date.now()}${this.client.id}`,
+			secret: `discord-easy-dashboard-${Date.now()}${this.client.id}`,
 			resave: false,
 			saveUninitialized: false,
 		}));
