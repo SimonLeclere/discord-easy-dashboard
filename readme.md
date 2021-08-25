@@ -28,4 +28,4 @@ npm install discord-easy-dashboard
 
 To quickly understand how to use the module, you can read [Getting Started](/docs/gettingStarted.md).
 
-Example bot using this package : https://github.com/SimonLeclere/Dashbot
+Example bot using this package (Click to see screenshots) : https://github.com/SimonLeclere/Dashbot
