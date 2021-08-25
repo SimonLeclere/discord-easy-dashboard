@@ -18,6 +18,8 @@ A dashboard is a very popular feature for Discord bots users as it allows them t
 
 ## Installation
 
+⚠ This package is only compatible with discord.js v13+
+
 ```js
 npm install discord-easy-dashboard
 ```
