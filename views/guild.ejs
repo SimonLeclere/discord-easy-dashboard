@@ -32,7 +32,7 @@
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
           <select class="form-select" aria-label="<%= setting.description %>" name='<%= setting.name %>'>
             <option value="<%= setting.get(bot, guild)[0] %>" selected><%= setting.get(bot, guild)[1] %></option>
-            <% Object.entries(setting.getSelectorEntries(bot, guild)).forEach(x => { %>
+            <% setting.getSelectorEntries(bot, guild).forEach(x => { %>
               <option value="<%= x[0] %>"><%= x[1] %></option>
             <% }) %>
           </select>
