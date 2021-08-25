@@ -1,7 +1,7 @@
 <%- include("partials/header", { bot, user, path, title: "Select server", is_logged, dashboardDetails, hasClientSecret: true }) %>
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <% user.guilds.forEach(guild => {
+  <% guilds.forEach(guild => {
       const permsOnGuild = new Perms(guild.permissions.toString());
       if(!permsOnGuild.has("MANAGE_GUILD")) return;
   %>

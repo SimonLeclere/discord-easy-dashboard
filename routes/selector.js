@@ -10,6 +10,7 @@ module.exports.Router = class Selector extends Router {
 			res.status(200).render('selector.ejs', {
 				bot: req.client,
 				user: req.user,
+				guilds: req.user.guilds.sort((a, b) => a.name < b.name ? - 1 : Number(a.name > b.name)),
 				is_logged: Boolean(req.session.user),
                 Perms: Permissions,
                 path: req.path,
