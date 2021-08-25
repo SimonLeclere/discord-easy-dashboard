@@ -80,9 +80,11 @@ class Dashboard extends EventEmitter {
 	}
 
     _loadRoutes() {
-		readdir('./routes', (err, files) => {
+		console.log('loading routes...')
+		readdir(path.join(__dirname, 'routes'), (err, files) => {
 			if (err) return new Error(err);
 			const routes = files.filter((c) => c.split('.').pop() === 'js');
+			console.log(routes);
 			if (files.length === 0 || routes.length === 0) throw new Error('No routes was found!');
 			for (let i = 0; i < routes.length; i++) {
 
