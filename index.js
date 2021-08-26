@@ -16,9 +16,9 @@ class Dashboard extends EventEmitter {
         this.app = express();
         
         this.details = {
-			name: options.name || client.user.username || null,
-            description: options.description || null,
-			serverUrl: options.serverUrl || null
+			name: options?.name || client.user.username || null,
+            description: options?.description || null,
+			serverUrl: options?.serverUrl || null
         };
 
 		if(!client.isReady()) client.on('ready', () => this.details.name = this.details.name === null ? this.client.user.username : this.details.name)
@@ -27,10 +27,10 @@ class Dashboard extends EventEmitter {
 		this._settings = [];
         
         this.config = {
-            baseUrl: options.baseUrl || 'http://localhost',
-            port: options.port || 3000,
-            secret: options.secret,
-            logRequests: options.logRequests || false
+            baseUrl: options?.baseUrl || 'http://localhost',
+            port: options?.port || 3000,
+            secret: options?.secret,
+            logRequests: options?.logRequests || false
         };
         
         if(!this.config.secret) console.warn('Without the client.secret parameter, some features of discord-easy-dashboard will be disabled, like Discord authentification or guild settings...');

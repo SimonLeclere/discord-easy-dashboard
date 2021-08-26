@@ -42,7 +42,11 @@ client.commands.forEach(command => {
 
 ## Server settings page
 
-If you specify the `secret` parameter, the discord authentication and server selector page will appear. For the moment you can't change any of the settings... because there are none! You must first tell the module what settings you want users to be able to change. 
+If you specify the `secret` parameter, the discord authentication and server selector page will appear.
+
+⚠ Don't forget, on the discord developers page in the OAuth section, to add a redirection link in the form `baseUrl:port/auth/login` !
+
+For the moment you can't change any of the settings... because there are none! You must first tell the module what settings you want users to be able to change. 
 
 For this discord-easy-dashboard provides several methods:
 
