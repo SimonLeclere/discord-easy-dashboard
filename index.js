@@ -97,7 +97,7 @@ class Dashboard extends EventEmitter {
     _start() {
 		try {
 			this.app.listen(this.app.get('port'));
-			console.log(`Dashboard launched on port ${this.app.get('port')} - ${this.config.baseUrl}${this.app.get('port') === 80 ? '' : ':' + this.app.get('port')}`);
+			this.emit('ready');
 		}
 		catch (e) {
 			throw new Error(e);
