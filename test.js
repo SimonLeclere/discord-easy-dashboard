@@ -24,6 +24,9 @@ const getPrefix = (discordClient, guild) => discordClient.prefixes[guild.id] || 
 client.dashboard.addTextInput('Prefix', 'The prefix that is added to discord messages in order to invoke commands.', validatePrefix, setPrefix, getPrefix);
 
 client.on('ready', () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
+client.dashboard.on('ready', () => {
+    console.log(`Dashboard launched on port ${config.port} - ${config.baseUrl}${config.port === 80 ? '' : ':' + config.port}`);
+})
 
 client.on('messageCreate', message => {
     
