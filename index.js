@@ -9,6 +9,8 @@ class Dashboard extends EventEmitter {
     constructor(client, options) {
 		super();
 
+		if(+process.versions.node.split('.')[0] < 16) throw new Error('Discord-easy-dashboard only supports node-v16+');
+
 		if (!client) throw new Error('Client is a required parameter.');
         this.client = client;
 
@@ -16,7 +18,7 @@ class Dashboard extends EventEmitter {
         this.app = express();
         
         this.details = {
-			name: options?.name || client.user.username || null,
+			name: options?.name || client?.user?.username || null,
             description: options?.description || null,
 			serverUrl: options?.serverUrl || null
         };
