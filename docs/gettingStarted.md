@@ -27,6 +27,14 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.secret (string) : The client secret of your bot, accessible at `https://discord.com/developers/applications` (OAuth2 section). If specified, enables authentication to Discord and activates the server selection and settings pages. No default value.
 - options.logRequests (boolean) : Log or not each request made to the dashboard (for development purposes). Default value is false.
 
+## Ready event
+
+```js
+client.dashboard.on('ready', () => {
+    console.log(`Dashboard launched on port ${config.port} - ${config.baseUrl}${config.port === 80 ? '' : ':' + config.port}`);
+});
+```
+
 ## Command list page
 
 To add a page listing the commands of your bot, you have to register at least one command with the `registerCommand` function. This one takes 3 parameters : the name of the command, a description of what it does and how to use it.
