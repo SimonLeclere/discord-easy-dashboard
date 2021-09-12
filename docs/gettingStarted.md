@@ -27,6 +27,22 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.secret (string) : The client secret of your bot, accessible at `https://discord.com/developers/applications` (OAuth2 section). If specified, enables authentication to Discord and activates the server selection and settings pages. No default value.
 - options.logRequests (boolean) : Log or not each request made to the dashboard (for development purposes). Default value is false.
 
+
+## Important !! 
+
+If you want to use authentication via Discord, you must not only specify the `client.secret` option but also add, on your discord developpers page, a valid redirection URL!
+
+Example:
+
+If your dashboard has the following settings: 
+```js
+{
+    baseUrl: 'http://localhost',
+    port: 3000,
+}
+```
+You have to go to the page `https://discord.com/developers/applications`, in the section OAuth2 and add as a redirectURI `http://localhost:3000/auth/login`.
+
 ## Ready event
 
 ```js
