@@ -30,7 +30,7 @@ class Dashboard extends EventEmitter {
         
         this.config = {
             baseUrl: options?.baseUrl || 'http://localhost',
-            port: options?.port || 3000,
+            port: options?.port || "",
             secret: options?.secret,
             logRequests: options?.logRequests || false
         };
