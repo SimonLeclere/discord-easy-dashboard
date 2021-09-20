@@ -62,7 +62,7 @@ module.exports.Router = class Auth extends Router {
 				res.status(200).redirect('/');
 			}
 			else {
-				res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${req.client.user.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}:${req.dashboardConfig.port}/auth/login`)}`);
+				res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${req.client.user.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}/auth/login`)}`);
 			}
 		});
 		this.get('/logout', [CheckAuth], function(req, res) {
