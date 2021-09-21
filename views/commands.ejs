@@ -1,4 +1,4 @@
-<%- include("partials/header", { bot, user, title: "Home", is_logged, dashboardDetails, hasClientSecret }) %>
+<%- await include("partials/header", { bot, user, title: "Home", is_logged, dashboardDetails, hasClientSecret }) %>
 
 <div class="container-sm center" style="margin-top: 25px;">
   <div class="d-grid gap-2 col-6 mx-auto">
@@ -33,4 +33,4 @@
 
   </div>
 </div>
-<%- include("partials/footer") %>
+<%- await include("partials/footer") %>

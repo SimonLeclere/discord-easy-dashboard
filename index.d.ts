@@ -14,20 +14,23 @@ declare class Dashboard extends EventEmitter {
         description: string,
         validator: (value: any) => boolean,
         setter: (client: Client, guild: Guild, value: string) => void,
-        getter: (client: Client, guild: Guild) => string
+        getter: (client: Client, guild: Guild) => string | Promise<string>
     ): void;
     addBooleanInput(
         name: string,
         description: string,
         setter: (client: Client, guild: Guild, value: boolean) => void,
-        getter: (client: Client, guild: Guild) => boolean
+        getter: (client: Client, guild: Guild) => boolean | Promise<boolean>
     ): void;
     addSelector(
         name: string,
         description: string,
-        getSelectorEntries: (client: Client, guild: Guild) => [string, string][],
+        getSelectorEntries: (
+            client: Client,
+            guild: Guild
+        ) => [string, string][] | Promise<[string, string][]>,
         setter: (client: Client, guild: Guild, value: boolean) => void,
-        getter: (client: Client, guild: Guild) => boolean
+        getter: (client: Client, guild: Guild) => boolean | Promise<boolean>
     ): void;
 }
 

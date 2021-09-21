@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const { readdir } = require('fs');
 const path = require('path');
-
+const ejs = require("ejs")
 const { EventEmitter } = require('events');
 
 class Dashboard extends EventEmitter {
@@ -47,7 +47,14 @@ class Dashboard extends EventEmitter {
 		this.app.set('port', this.config.port || 3000);
         this.app.set('views', path.join(__dirname, 'views'));
 		this.app.set('view engine', 'ejs');
-		
+		this.app.engine('ejs', async (path, data, cb) => {
+			try {
+				let html = await ejs.renderFile(path, data, { async: true });
+				cb(null, html);
+			} catch (e) {
+				cb(e, '');
+			}
+		});
         this.app.use(express.static(path.join(__dirname, 'public')));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
@@ -91,7 +98,7 @@ class Dashboard extends EventEmitter {
 				if(!this.config.secret && ['auth.js', 'manage.js', 'selector.js'].includes(routes[i])) continue;
 
 				const route = require(`./routes/${routes[i]}`);
-				this.app.use(route.name, new route.Router());
+				this.app.use(route.name, route.Router);
 			}
 		});
 	}
