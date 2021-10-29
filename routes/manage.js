@@ -21,7 +21,13 @@ const Server = Router()
                 dashboardDetails: req.dashboardDetails,
                 settings: req.dashboardSettings,
             },
-            (err, html) => res.status(200).send(html)
+            (err, html) => {
+                if (err) {
+                    res.status(500).send(err.message);
+                    return console.error(err);
+                }
+                res.status(200).send(html);
+            }
         );
     })
     .post("/:guildID", CheckAuth, async (req, res) => {

@@ -11,23 +11,20 @@
     <hr>
     <form method="POST">
 
-      <% settings.forEach((setting, i) => { %>
-        <% if(setting.type === 'text input') { %>
+      <% for (let i = 0; i < settings.length; i++) { %>
+        <% const setting = settings[i] %> 
+        <% if (setting.type === 'text input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
           <input type="text" class="form-control" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
-        <% } %>
-
-        <% if(setting.type === 'boolean input') { %>
+        <% } else if (setting.type === 'boolean input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <div class="form-check form-switch">
             <input type='hidden' value='off' name='<%= setting.name %>'>
             <input class="form-check-input" type="checkbox" name="<%= setting.name %>" id="<%= setting.name %>" <%= await setting.get(bot, guild) ? 'checked' : '' %>>
             <label class="form-check-label" for="<%= setting.name %>"><%= setting.description %></label>
           </div>
-        <% } %>
-
-        <% if(setting.type === 'selector') { %>
+        <% } else if (setting.type === 'selector') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
           <select class="form-select" aria-label="<%= setting.description %>" name='<%= setting.name %>'>
@@ -37,11 +34,10 @@
             <% }) %>
           </select>
         <% } %>
-
-        <% if(i !== settings.length) { %>
-          <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">
-        <% } %>
-      <% }) %>
+          <% if (i !== settings.length) { %>
+            <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">
+          <% } %>
+      <% } %>
       
       <br><button type="submit" class="btn btn-success text-white">Save Settings</button>
     </form>
