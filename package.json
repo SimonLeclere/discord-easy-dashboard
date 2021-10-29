@@ -1,6 +1,6 @@
 {
     "name": "discord-easy-dashboard",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "💻 Complete framework to facilitate the creation of dashboard using discord.js and express",
     "main": "index.js",
     "scripts": {
