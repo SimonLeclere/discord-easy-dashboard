@@ -13,7 +13,13 @@ const Home = Router().get("/", async (req, res) => {
             hasClientSecret: Boolean(req.dashboardConfig.secret),
             commands: req.dashboardCommands,
         },
-        (err, html) => res.status(200).send(html)
+        (err, html) => {
+            if (err) {
+                res.status(500).send(err.message);
+                return console.error(err);
+            }
+            res.status(200).send(html);
+        }
     );
 });
 
