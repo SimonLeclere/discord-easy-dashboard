@@ -14,7 +14,7 @@ const Auth = Router()
             params.set("code", req.query.code);
             params.set(
                 "redirect_uri",
-                `${req.dashboardConfig.baseUrl}:${req.dashboardConfig.port}/auth/login`
+                `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`
             );
             let response = await fetch("https://discord.com/api/oauth2/token", {
                 method: "POST",
@@ -68,7 +68,7 @@ const Auth = Router()
                 `https://discordapp.com/api/oauth2/authorize?client_id=${
                     req.client?.user?.id
                 }&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(
-                    `${req.dashboardConfig.baseUrl}:${req.dashboardConfig.port}/auth/login`
+                    `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`
                 )}`
             );
         }

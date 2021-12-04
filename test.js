@@ -10,8 +10,9 @@ client.dashboard = new Dashboard(client, {
     name: 'DashBot', // Bot's name
     description: 'A super cool bot with an online dashboard!', // Bot's description
     baseUrl: 'http://localhost', // Leave this if ur in local development
-    port: 80,
-    secret: 'cl13nt.s3cr3t', // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section)
+    port: 8080,
+    noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
+    secret: '_2NmYLOsVd1wbgvJteyGq-N5zeSaDoJY', // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section)
 });
 
 client.prefixes = {}; // We' ll store the prefixes of each server here
@@ -35,4 +36,4 @@ client.on('messageCreate', message => {
     if (message.content.startsWith(prefix + 'ping')) message.reply('Pong !'); // 🏓 :D
 });
 
-client.login('sup3r-s3cr3t-t0k3n'); // Discord API login
+client.login('NzIwNzQ5NjI4OTE5Nzc1Mjgy.XuKgZg.3fj07ap17ag38L95NklgDRr9OOk'); // Discord API login
