@@ -1,6 +1,6 @@
 /* Require discord.js and discord-easy-dashboard */
 const { Client, Intents } = require('discord.js');
-const Dashboard = require('./index.js');
+const Dashboard = require('discord-easy-dashboard');
 
 /* create the discord client */
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
@@ -10,9 +10,9 @@ client.dashboard = new Dashboard(client, {
     name: 'DashBot', // Bot's name
     description: 'A super cool bot with an online dashboard!', // Bot's description
     baseUrl: 'http://localhost', // Leave this if ur in local development
-    port: 8080,
+    port: 80,
     noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
-    secret: '_2NmYLOsVd1wbgvJteyGq-N5zeSaDoJY', // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section)
+    secret: 'cl13nt-s3cr3t', // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section)
 });
 
 client.prefixes = {}; // We' ll store the prefixes of each server here
@@ -25,9 +25,6 @@ const getPrefix = (discordClient, guild) => discordClient.prefixes[guild.id] || 
 client.dashboard.addTextInput('Prefix', 'The prefix that is added to discord messages in order to invoke commands.', validatePrefix, setPrefix, getPrefix);
 
 client.on('ready', () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
-client.dashboard.on('ready', () => {
-    console.log(`Dashboard launched on port ${config.port} - ${config.baseUrl}${config.port === 80 ? '' : ':' + config.port}`);
-})
 
 client.on('messageCreate', message => {
     
@@ -36,4 +33,4 @@ client.on('messageCreate', message => {
     if (message.content.startsWith(prefix + 'ping')) message.reply('Pong !'); // 🏓 :D
 });
 
-client.login('NzIwNzQ5NjI4OTE5Nzc1Mjgy.XuKgZg.3fj07ap17ag38L95NklgDRr9OOk'); // Discord API login
+client.login('Sup3r-s3cr3t-t0k3n'); // Discord API login
