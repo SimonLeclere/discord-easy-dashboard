@@ -30,6 +30,7 @@ const Auth = Router()
             const tokens = await response.json();
             // If the code isn't valid
             console.log('tokens', tokens);
+            console.log('urlSearchParams', params.toString());
             if (tokens.error || !tokens.access_token) return res.redirect("/auth/login");
             const userData = {
                 infos: null,
