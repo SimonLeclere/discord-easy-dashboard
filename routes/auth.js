@@ -29,7 +29,7 @@ const Auth = Router()
             // Fetch tokens (used to fetch user informations)
             const tokens = await response.json();
             // If the code isn't valid
-            console.log(tokens);
+            console.log('tokens', tokens);
             if (tokens.error || !tokens.access_token) return res.redirect("/auth/login");
             const userData = {
                 infos: null,
