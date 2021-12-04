@@ -7,7 +7,6 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Auth = Router()
     .get("/login", async (req, res) => {
-        console.log(req.query.code);
         if (req.query.code) {
             /* Obtain token - used to fetch user guilds and user informations */
             const params = new URLSearchParams();
@@ -30,6 +29,7 @@ const Auth = Router()
             // Fetch tokens (used to fetch user informations)
             const tokens = await response.json();
             // If the code isn't valid
+            console.log(tokens);
             if (tokens.error || !tokens.access_token) return res.redirect("/auth/login");
             const userData = {
                 infos: null,
