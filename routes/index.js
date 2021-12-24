@@ -8,6 +8,7 @@ const Home = Router().get("/", async (req, res) => {
             user: req.user,
             is_logged: Boolean(req.session.user),
             dashboardDetails: req.dashboardDetails,
+            dashboardConfig: req.dashboardConfig,
             baseUrl: req.dashboardConfig.baseUrl,
             port: req.dashboardConfig.port,
             hasClientSecret: Boolean(req.dashboardConfig.secret),

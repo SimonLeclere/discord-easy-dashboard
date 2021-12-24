@@ -34,7 +34,8 @@ class Dashboard extends EventEmitter {
             port: options?.port || 3000,
 			noPortIncallbackUrl: options?.noPortIncallbackUrl || false,
             secret: options?.secret,
-            logRequests: options?.logRequests || false
+            logRequests: options?.logRequests || false,
+			injectCSS: options?.injectCSS || null,
         };
         
         if(!this.config.secret) console.warn('Without the client.secret parameter, some features of discord-easy-dashboard will be disabled, like Discord authentification or guild settings...');

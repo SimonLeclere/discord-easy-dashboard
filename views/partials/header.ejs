@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link href="/bootstrap.min.css" rel="stylesheet">
+    <%- dashboardConfig.injectCSS ? `<style>${dashboardConfig.injectCSS}</style>` : '' %>
 </head>
 
 <body>
@@ -53,13 +54,3 @@
       </div>
     </div>
   </nav>
-  <!-- <% if (is_logged) { %>
-    <p>Logged in as <%= user.username %>#<%= user.discriminator %>.</p>
-    <a href="/logout">Logout</a>
-  <% } else { %>
-    <a type="button" href="/login">Login</a><br>
-  <% } %>
-  <% if(user && title === "Home") { %>
-    <a type="button" href="/selector">Back to dashboard</a><br>
-  <% } %>
-  <%- title === "Dashboard" ? "" : "<hr>" %> -->

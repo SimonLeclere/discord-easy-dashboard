@@ -18,6 +18,7 @@ const Selector = Router().get("/", CheckAuth, async (req, res) => {
             baseUrl: req.dashboardConfig.baseUrl,
             port: req.dashboardConfig.port,
             dashboardDetails: req.dashboardDetails,
+            dashboardConfig: req.dashboardConfig,
         },
         (err, html) => {
             if (err) {

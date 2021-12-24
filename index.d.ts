@@ -43,6 +43,7 @@ declare interface Options {
     port?: number;
     secret: string;
     logRequests?: boolean;
+    injectCSS?: string;
 }
 
 declare interface Config {

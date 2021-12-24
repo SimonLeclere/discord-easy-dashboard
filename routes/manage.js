@@ -66,6 +66,7 @@ const Server = Router()
                         : "Your settings have been saved.",
                 errors: errors.length > 0,
                 dashboardDetails: req.dashboardDetails,
+                dashboardConfig: req.dashboardConfig,
                 settings: req.dashboardSettings,
             },
             (err, html) => res.status(200).send(html)

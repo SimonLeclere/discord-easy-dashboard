@@ -28,7 +28,7 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.noPortIncallbackUrl (boolean) : If set to true, the callback url will not contain the port. Default to `false`. Use it if you are using repl.it or other services that do not support port in the callback url.
 - options.secret (string) : The client secret of your bot, accessible at `https://discord.com/developers/applications` (OAuth2 section). If specified, enables authentication to Discord and activates the server selection and settings pages. No default value.
 - options.logRequests (boolean) : Log or not each request made to the dashboard (for development purposes). Default value is false.
-
+- options.injectCSS (string) : A CSS string to inject in the dashboard html. Default value is null.
 
 ## Important !! 
 
@@ -124,3 +124,19 @@ client.login('Sup3r-s3cr3t-t0k3n'); // Discord API login
 Make sure you read the comments to understand the example!
 
 Results : ![prefix example](assets/prefix%20example.png)
+
+## Customize the dashboard
+
+You can easily change the colors, the background, ... of the dashboard by using the `injectCSS` option.
+
+For example, to change the background colors of the dashboard, you can use the following code:
+
+```js
+client.dashboard = new Dashboard(client, {
+    // other options
+    injectCSS: `
+	body {
+		background-color: #FDE9E0;
+	}`
+})
+```
