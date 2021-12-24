@@ -12,7 +12,7 @@
         <% if (bot.guilds.cache.get(guild.id)) { %>
           <a href="/manage/<%- guild.id %>" class="btn btn-success text-white">Edit Settings</a>
         <% } else { %>
-          <a href="https://discord.com/oauth2/authorize?client_id=<%= bot.user.id %>&scope=bot&permissions=8&guild_id=<%= guild.id %>" class="btn btn-primary text-white">Invite Bot</a>
+          <a href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>" class="btn btn-primary text-white">Invite Bot</a>
         <% } %>
       </div>
     </div>

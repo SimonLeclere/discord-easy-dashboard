@@ -18,7 +18,7 @@
 
     <hr>
       
-    <a class="btn btn-primary text-white" href="<%= `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
+    <a class="btn btn-primary text-white" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
     
     <% if(dashboardDetails.serverUrl) { %>
       <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>

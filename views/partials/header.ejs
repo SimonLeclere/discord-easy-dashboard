@@ -24,7 +24,7 @@
             </li>
           <% } %>
           <li class="nav-item">
-            <a class="nav-link" href="<%= `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
+            <a class="nav-link" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
           </li>
           <% if(dashboardDetails.serverUrl) { %>
             <li class="nav-item">

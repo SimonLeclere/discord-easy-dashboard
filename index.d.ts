@@ -38,6 +38,7 @@ declare interface Options {
     name?: string;
     description?: string;
     serverUrl?: string;
+    inviteUrl?: string;
     baseUrl?: string;
     port?: number;
     secret: string;
@@ -47,6 +48,7 @@ declare interface Options {
 declare interface Config {
     baseUrl: string;
     port: number;
+    noPortIncallbackUrl: boolean;
     secret: string;
     logRequests: boolean;
 }

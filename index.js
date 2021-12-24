@@ -20,7 +20,8 @@ class Dashboard extends EventEmitter {
         this.details = {
 			name: options?.name || client?.user?.username || null,
             description: options?.description || null,
-			serverUrl: options?.serverUrl || null
+			serverUrl: options?.serverUrl || null,
+			inviteUrl: options?.inviteUrl || null
         };
 
 		if(!client.isReady()) client.on('ready', () => this.details.name = this.details.name === null ? this.client.user.username : this.details.name)

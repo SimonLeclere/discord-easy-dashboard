@@ -22,6 +22,7 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.name (string) : The name of the bot - Will be displayed on the home page. The default value is the bot nickname (obtained with client.user.username).
 - options.description (string) : A description of the bot - Will be displayed on the home page. No default value.
 - options.serverUrl (string) : An url to your bot support server - If specified, adds a button to access it on the dashboard. No default value.
+- options.inviteUrl (string) : An url to your bot invite link - By default, the dashboard will try to generate an invite link for you with admin permissions.
 - options.baseUrl (string) : The base url for the dashboard. Default to `localhost` for local developpment.
 - options.port (number) : The port of the dashboard. Default to `3000`. Set it to `80` to access the dashboard without specifying the port.
 - options.noPortIncallbackUrl (boolean) : If set to true, the callback url will not contain the port. Default to `false`. Use it if you are using repl.it or other services that do not support port in the callback url.
