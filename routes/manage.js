@@ -19,6 +19,7 @@ const Server = Router()
                 alert: null,
                 errors: false,
                 dashboardDetails: req.dashboardDetails,
+                dashboardConfig: req.dashboardConfig,
                 settings: req.dashboardSettings,
             },
             (err, html) => {
