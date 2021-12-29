@@ -20,6 +20,7 @@ class Dashboard extends EventEmitter {
         this.details = {
             name: options?.name || client?.user?.username || null,
             description: options?.description || null,
+            faviconPath: options?.faviconPath || null,
             serverUrl: options?.serverUrl || null,
             inviteUrl: options?.inviteUrl || null,
         };
@@ -74,6 +75,7 @@ class Dashboard extends EventEmitter {
                 cb(e, "");
             }
         });
+        if (this.details.faviconPath) this.app.use(favicon(this.details.faviconPath));
         this.app.use(express.static(join(__dirname, "public")));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));

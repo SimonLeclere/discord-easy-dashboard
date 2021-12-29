@@ -12,7 +12,7 @@ client.dashboard = new Dashboard(client, {
     baseUrl: "http://localhost", // Leave this if ur in local development
     port: 3000,
     noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
-    secret: "RJjq64OyRWjzl11mPxuwoBIDTy2y4zNC", // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
+    secret: "cl13nt-s3cr3t", // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
     theme: "dark",
     logRequests: true,
 });
@@ -40,4 +40,4 @@ client.on("messageCreate", (message) => {
     if (message.content.startsWith(prefix + "ping")) message.reply("Pong !"); // 🏓 :D
 });
 
-client.login("NzY0NDQwNDgxNjk3NzU5MjQz.X4GSrQ.jJJaav0rbq8TY4Ydumqw2XCpnbM"); // Discord API login
+client.login("Sup3r-s3cr3t-t0k3n"); // Discord API login
