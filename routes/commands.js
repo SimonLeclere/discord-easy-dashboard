@@ -2,8 +2,12 @@ const { Router } = require("express");
 
 const Commands = Router().get("/", function (req, res) {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
-
-    res.status(200).render("commands.ejs", {
+    let file = req.dashboardConfig.theme["commands"];
+    if (!file) {
+        console.warn(`WARNING: No key found in the theme object for the commands route, falling back to the default one`);
+        file = "commands.ejs"
+    }
+    res.status(200).render(file, {
         bot: req.client,
         user: req.user,
         is_logged: Boolean(req.session.user),

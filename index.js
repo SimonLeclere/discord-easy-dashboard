@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const { readdir } = require('fs');
-const path = require('path');
+const { readdir, existsSync } = require('fs');
+const {join} = require('path');
 const ejs = require("ejs")
 const { EventEmitter } = require('events');
 
@@ -30,12 +30,19 @@ class Dashboard extends EventEmitter {
 		this._settings = [];
         
         this.config = {
-            baseUrl: options?.baseUrl || 'http://localhost',
+            baseUrl: options?.baseUrl || "http://localhost",
             port: options?.port || 3000,
-			noPortIncallbackUrl: options?.noPortIncallbackUrl || false,
+            noPortIncallbackUrl: options?.noPortIncallbackUrl || false,
             secret: options?.secret,
             logRequests: options?.logRequests || false,
-			injectCSS: options?.injectCSS || null,
+            injectCSS: options?.injectCSS || null,
+            theme: options?.theme
+                ? existsSync(join(__dirname, "themes", options.theme))
+                    ? require(join(__dirname, "themes", options.theme))
+                    : existsSync(options.theme)
+                    ? require(options.theme)
+                    : require(join(__dirname, "themes", "light"))
+                : require(join(__dirname, "themes", "light")),
         };
         
         if(!this.config.secret) console.warn('Without the client.secret parameter, some features of discord-easy-dashboard will be disabled, like Discord authentification or guild settings...');
@@ -48,7 +55,7 @@ class Dashboard extends EventEmitter {
     
     _setup() {
 		this.app.set('port', this.config.port || 3000);
-        this.app.set('views', path.join(__dirname, 'views'));
+        this.app.set('views', join(__dirname, 'views'));
 		this.app.set('view engine', 'ejs');
 		this.app.engine('ejs', async (path, data, cb) => {
 			try {
@@ -58,7 +65,7 @@ class Dashboard extends EventEmitter {
 				cb(e, '');
 			}
 		});
-        this.app.use(express.static(path.join(__dirname, 'public')));
+        this.app.use(express.static(join(__dirname, 'public')));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
         
@@ -68,7 +75,7 @@ class Dashboard extends EventEmitter {
         }
     
 		this.app.use(session({
-			secret: `discord-easy-dashboard-${Date.now()}${this.client.id}`,
+			secret: `discord-easy-dashboard-${Date.now()}${this.client.id}${Math.random().toString(36)}`,
 			resave: false,
 			saveUninitialized: false,
 		}));
@@ -92,7 +99,7 @@ class Dashboard extends EventEmitter {
 	}
 
     _loadRoutes() {
-		readdir(path.join(__dirname, 'routes'), (err, files) => {
+		readdir(join(__dirname, 'routes'), (err, files) => {
 			if (err) return new Error(err);
 			const routes = files.filter((c) => c.split('.').pop() === 'js');
 			if (files.length === 0 || routes.length === 0) throw new Error('No routes was found!');
