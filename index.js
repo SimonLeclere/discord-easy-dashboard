@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const favicon = require('serve-favicon');
 const { readdir } = require('fs');
 const path = require('path');
 const ejs = require("ejs")
@@ -20,6 +21,7 @@ class Dashboard extends EventEmitter {
         this.details = {
 			name: options?.name || client?.user?.username || null,
             description: options?.description || null,
+			faviconPath: options?.faviconPath || null,
 			serverUrl: options?.serverUrl || null,
 			inviteUrl: options?.inviteUrl || null
         };
@@ -58,6 +60,7 @@ class Dashboard extends EventEmitter {
 				cb(e, '');
 			}
 		});
+		if(this.details.faviconPath) this.app.use(favicon(this.details.faviconPath));
         this.app.use(express.static(path.join(__dirname, 'public')));
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));

@@ -29,6 +29,7 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.secret (string) : The client secret of your bot, accessible at `https://discord.com/developers/applications` (OAuth2 section). If specified, enables authentication to Discord and activates the server selection and settings pages. No default value.
 - options.logRequests (boolean) : Log or not each request made to the dashboard (for development purposes). Default value is false.
 - options.injectCSS (string) : A CSS string to inject in the dashboard html. Default value is null.
+- options.faviconPath (string) : A path to a favicon. Default value is null.
 
 ## Important !! 
 

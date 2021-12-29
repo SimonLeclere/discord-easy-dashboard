@@ -44,6 +44,7 @@ declare interface Options {
     secret: string;
     logRequests?: boolean;
     injectCSS?: string;
+    faviconPath?: string;
 }
 
 declare interface Config {
