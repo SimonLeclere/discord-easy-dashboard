@@ -1,13 +1,9 @@
 const { Router } = require("express");
 
 const Commands = Router().get("/*", function (req, res) {
-    const path = req.baseUrl.split("/").pop()
+    const path = req.baseUrl.split("/").pop();
     if (!req.dashboardConfig.theme[path]) {
-        let file = req.dashboardConfig.theme["404"];
-        if (!file) {
-            console.warn(`WARNING: No key found in the theme object for the 404 route, falling back to the default one`);
-            file = "404.ejs"
-        }
+        let file = req.dashboardConfig.theme["404"] || "404.ejs";
         return res.status(404).render(file, {
             bot: req.client,
             user: req.user,

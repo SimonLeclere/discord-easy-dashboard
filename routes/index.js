@@ -1,11 +1,7 @@
 const { Router } = require("express");
 
 const Home = Router().get("/", async (req, res) => {
-    let file = req.dashboardConfig.theme["home"];
-    if (!file) {
-        console.warn(`WARNING: No key found in the theme object for the home route, falling back to the default one`);
-        file = "index.ejs"
-    }
+    let file = req.dashboardConfig.theme["home"] || "index.ejs";
     return await res.render(
         file,
         {
