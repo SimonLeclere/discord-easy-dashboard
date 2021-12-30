@@ -30,6 +30,8 @@ To quickly understand how to use the module, you can read [Getting Started](/doc
 
 To create your own theme for the module, read the [Theming](/docs/THEMING.md) section
 
+<br>
 
 Example bot using this package (Click to see screenshots) : https://github.com/SimonLeclere/Dashbot
+
 Example bot using this package and repl.it : https://replit.com/@SimonLeclere/Discord-easy-dashboard?v=1
