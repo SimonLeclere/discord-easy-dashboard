@@ -13,7 +13,7 @@ client.dashboard = new Dashboard(client, {
     port: 3000,
     noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
     secret: "cl13nt-s3cr3t", // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
-    theme: "dark",
+    theme: "dark", // dark or light
     logRequests: true,
 });
 

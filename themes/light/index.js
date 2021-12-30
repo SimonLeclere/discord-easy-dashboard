@@ -1,6 +1,6 @@
 const { join } = require("path");
 
-const BASE_PATH = "../../views";
+const BASE_PATH = ".";
 
 module.exports = {
     home: join(__dirname, BASE_PATH, "index.ejs"),
