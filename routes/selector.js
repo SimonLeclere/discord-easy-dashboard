@@ -4,8 +4,9 @@ const CheckAuth = (req, res, next) =>
 const { Permissions } = require("discord.js");
 
 const Selector = Router().get("/", CheckAuth, async (req, res) => {
+    let file = req.dashboardConfig.theme["selector"] || "selector.ejs";
     return await res.render(
-        "selector.ejs",
+        file,
         {
             bot: req.client,
             user: req.user,

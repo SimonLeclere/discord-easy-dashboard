@@ -9,8 +9,10 @@ const Server = Router()
 
         const member = await guild.members.fetch(req.user.id);
         if (!member || !member.permissions.has("MANAGE_GUILD")) return res.redirect("/selector");
+        let file = req.dashboardConfig.theme["guild"] || "guild.ejs";
+
         return await res.render(
-            "guild.ejs",
+            file,
             {
                 bot: req.client,
                 user: req.user,
@@ -51,9 +53,10 @@ const Server = Router()
 
             setting.set(req.client, guild, req.body[item]);
         });
+        let file = req.dashboardConfig.theme["guild"] || "guild.ejs";
 
         return await res.render(
-            "guild.ejs",
+            file,
             {
                 bot: req.client,
                 user: req.user,

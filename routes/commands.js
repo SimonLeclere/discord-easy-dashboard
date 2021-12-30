@@ -2,8 +2,9 @@ const { Router } = require("express");
 
 const Commands = Router().get("/", function (req, res) {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
+    let file = req.dashboardConfig.theme["commands"] || "commands.ejs";
 
-    res.status(200).render("commands.ejs", {
+    res.status(200).render(file, {
         bot: req.client,
         user: req.user,
         is_logged: Boolean(req.session.user),

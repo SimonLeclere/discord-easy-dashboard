@@ -1,8 +1,9 @@
 const { Router } = require("express");
 
 const Home = Router().get("/", async (req, res) => {
+    let file = req.dashboardConfig.theme["home"] || "index.ejs";
     return await res.render(
-        "index.ejs",
+        file,
         {
             bot: req.client,
             user: req.user,
