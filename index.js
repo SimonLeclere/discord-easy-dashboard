@@ -185,6 +185,10 @@ class Dashboard extends EventEmitter {
     addBooleanInput(name, description, setter, getter) {
         this._settings.push({ name, description, type: "boolean input", set: setter, get: getter });
     }
+    
+    addColorInput(name, description, setter, getter) {
+        this._settings.push({ name, description, type: "color input", set: setter, get: getter });
+    }
 
     addSelector(name, description, getSelectorEntries, setter, getter) {
         this._settings.push({

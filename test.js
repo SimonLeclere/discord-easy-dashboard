@@ -10,10 +10,10 @@ client.dashboard = new Dashboard(client, {
     name: "DashBot", // Bot's name
     description: "A super cool bot with an online dashboard!", // Bot's description
     baseUrl: "http://localhost", // Leave this if ur in local development
-    port: 3000,
+    port: 80,
     noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
-    secret: "cl13nt-s3cr3t", // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
-    theme: "dark", // dark or light
+    secret: "cl1nt-s3cr3t", // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
+    theme: "light", // dark or light
     logRequests: true,
 });
 
@@ -32,12 +32,31 @@ client.dashboard.addTextInput(
     getPrefix
 );
 
+client.colors = {}; // We' ll store the colors of each server here
+
+const setColor = (discordClient, guild, value) => (discordClient.colors[guild.id] = value); // Stores the color in the client.colors object
+const getColor = (discordClient, guild) => discordClient.colors[guild.id] || "#ffffff"; // Get the color in the client.colors object or give the default one
+
+client.dashboard.addColorInput('Color', 'The color of the embeds', setColor, getColor);
+
 client.on("ready", () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
 
 client.on("messageCreate", (message) => {
     let prefix = getPrefix(client, message.guild); // We reuse our function to gain in readability!
 
     if (message.content.startsWith(prefix + "ping")) message.reply("Pong !"); // 🏓 :D
+
+    // send a red embed
+    if (message.content.startsWith(prefix + "color")) {
+        message.channel.send({
+            embeds: [{
+                color: getColor(client, message.guild),
+                title: "Color embed",
+                description: "This is a color embed",
+            }],
+        });
+    }
+
 });
 
-client.login("Sup3r-s3cr3t-t0k3n"); // Discord API login
+client.login("sup3r-s3cr3t-t0k3n"); // Discord API login

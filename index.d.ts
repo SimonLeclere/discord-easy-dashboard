@@ -32,6 +32,13 @@ declare class Dashboard extends EventEmitter {
         setter: (client: Client, guild: Guild, value: boolean) => void,
         getter: (client: Client, guild: Guild) => boolean | Promise<boolean>
     ): void;
+
+    addColorInput(
+        name: string,
+        description: string,
+        setter: (client: Client, guild: Guild, value: string) => void,
+        getter: (client: Client, guild: Guild) => string | Promise<string>
+    ): void;
 }
 
 declare interface Options {
