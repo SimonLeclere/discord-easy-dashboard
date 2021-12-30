@@ -11,7 +11,7 @@
     <hr>
     <form method="POST">
 
-      <% for (let i = 0; i < settings.length; i++) { %>
+      <% for (let i = 0; i < settings.length; i++) { %>
         <% const setting = settings[i] %> 
         <% if (setting.type === 'text input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>

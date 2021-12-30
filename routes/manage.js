@@ -48,8 +48,7 @@ const Server = Router()
 
             if (setting.validator && !setting.validator(req.body[item])) return errors.push(item);
 
-            if (setting.type === "boolean input")
-                req.body[item] = Array.isArray(req.body[item]) ? true : false;
+            if (setting.type === "boolean input") req.body[item] = Array.isArray(req.body[item]) ? true : false;
 
             setting.set(req.client, guild, req.body[item]);
         });
