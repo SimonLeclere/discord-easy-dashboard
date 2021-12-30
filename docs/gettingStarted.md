@@ -81,6 +81,7 @@ For this discord-easy-dashboard provides several methods:
 - `addTextInput(name, description, validator, setter, getter)` - Adds a text input. The `validator` parameter is a function that takes the string the user entered as a parameter and returns `true` if it is valid and `false` otherwise. The `setter` and `getter` parameters are functions that take the discord client and the guild object (and the value entered by the user for `setter`) as parameters and save or read from the database.
 - `addBooleanInput(name, description, setter, getter)` - Adds a switch that takes either the value `true` or `false`. The setter and getter parameters are similar to those detailed above.
 - `addSelector(name, description, getSelectorEntries, setter, getter)` - Allows you to add a selector that takes the form of a dropdown menu. You can use it to ask the user to choose a role or a channel. The getSelectorEntries() function takes as parameters the discord client and the guild object and must return a list of couples [id, name]. The getter function should also return a couple [id, name].
+- `addColorInput(name, description, setter, getter)` - Adds a color picker. The setter and getter parameters are similar to those detailed above.
 
 Now with these few functions it is quite simple to create a basic dashboard. Let's see below an example that allows the user to choose a custom prefix for his server:
 
