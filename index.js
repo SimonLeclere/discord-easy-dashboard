@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const favicon = require("serve-favicon");
 const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 const ejs = require("ejs");
