@@ -23,16 +23,38 @@ And these to a `partials` directory: [footer.ejs](https://github.com/SimonLecler
 
 ## Editing
 
-You can use the following parameters being passed at render:
-- bot: The client Object of the bot
-- user: the user Object of the user logged (if logged in)
-- is_logged: whether the user is logged in or not
-- dashboardDetails: an Object containing details about the dashboard
-- dashboardConfig: an Object containing the dashboard's config
-- baseUrl: the base URL of the dashboard
-- port: the port number of the dashboard
-- hasClientSecret: whether the client's secret has been provided in the config or not
-- commands: an Array of command Objects registered with `<dashboard>.registerCommand`
+Each page is a simple EJS file that must start with
+```ejs
+<%- await include("partials/header", { bot, user, title: "Home", is_logged, dashboardDetails, dashboardConfig, hasClientSecret }) %>`
+```
+
+and end with : 
+```ejs
+<%- await include("partials/footer") %>
+```
+
+To include the headers and footer of the page (also customizable in the partials folder).
+
+For each page, you have access to variables allowing you to include information dynamically (see files in routes/ folder to know their type):
+- home.ejs : bot, user, is_logged, dashboardDetails, dashboardConfig, baseUrl, port, hasClientSecret, commands
+- commands.ejs : bot, user, is_logged, dashboardDetails, dashboardConfig, baseUrl, port, hasClientSecret, commands
+- guild.ejs : bot, user, is_logged, guild, alert, errors, dashboardDetails, dashboardConfig, settings
+- selector.ejs : bot, user, guilds, is_logged, Perms, path, baseUrl, port, dashboardDetails, dashboardConfig
+
+You can now use basic html combined with EJS templating features to create your own custom dashboard!
+
+Reminder of the different EJS tags:
+
+    <% 'Scriptlet' tag, for control-flow, no output
+    <%_ ‘Whitespace Slurping’ Scriptlet tag, strips all whitespace before it
+    <%= Outputs the value into the template (HTML escaped)
+    <%- Outputs the unescaped value into the template
+    <%# Comment tag, no execution, no output
+    <%% Outputs a literal '<%'
+    %> Plain ending tag
+    -%> Trim-mode ('newline slurp') tag, trims following newline
+    _%> ‘Whitespace Slurping’ ending tag, removes all whitespace after it
+
 
 ## Using your theme !
 
