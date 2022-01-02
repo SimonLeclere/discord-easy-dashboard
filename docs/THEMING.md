@@ -1,5 +1,5 @@
 # Theming
-discord-easy-dashboards now supports themes !
+discord-easy-dashboard now supports themes !
 You can use one included by default (`dark` or `light`) or make your own. This is a guide to make it easier.
 
 ## Setting up
