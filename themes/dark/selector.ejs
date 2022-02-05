@@ -3,7 +3,7 @@
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
   <% guilds.forEach(guild => {
       const permsOnGuild = new Perms(guild.permissions.toString());
-      if(!permsOnGuild.has("MANAGE_GUILD")) return;
+      if(!permsOnGuild.has("ADMINISTRATOR")) return;
   %>
     <div class="card" style="width: 18rem; margin: 2rem;">
     <%- guild.icon ? `<img src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}" class="card-img-top" style="max-width: 18rem;">` : '<img src="https://cdn.discordapp.com/embed/avatars/0.png" class="card-img-top" style="max-width: 18rem;">' %>
