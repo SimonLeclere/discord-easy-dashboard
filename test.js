@@ -10,6 +10,7 @@ const Dashboard = require('./');
 /* create the discord client */
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
+
 /* Initiate the Dashboard class and attach it to the discord client for easy access */
 client.dashboard = new Dashboard(client, {
 	name: 'DashBot', // Bot's name

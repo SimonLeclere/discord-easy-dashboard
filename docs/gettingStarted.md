@@ -30,7 +30,9 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.logRequests (boolean) : Log or not each request made to the dashboard (for development purposes). Default value is false.
 - options.injectCSS (string) : A CSS string to inject in the dashboard html. Default value is null.
 - options.faviconPath (string) : A path to a favicon. Default value is null.
-- options.theme (string) : Can be either `light` (default) or `dark` or a path to a theme folder, see [THEMING.md](THEMING.md) for further information.
+- options.theme (string) : Can be either `light` (default) or `dark`, a path to a theme folder or an object, see [THEMING.md](THEMING.md) for further information.
+- options.permissions (object) : A list of permissions required to access the dashboard. Default value is `[MANAGE_GUILD]`.
+- options.session (object) : A session object to use instead of the default one, for storing cookies for example. Default value is null. See [STORING_COOKIES.md](STORING_COOKIES.md) for further information.
 
 ## Important !! 
 

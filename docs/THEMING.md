@@ -58,11 +58,13 @@ Reminder of the different EJS tags:
 
 ## Using your theme !
 
-You can pass the theme folder path in the dashboard config Object:
+You can pass the theme folder path in the dashboard config Object or require it:
 
 ```js
 client.dashboard = new Dashboard(client, {
     theme: "path/to/your/folder"
+    // or
+    // theme: require("path/to/your/folder")
 });
 ```
 
