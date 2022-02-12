@@ -1,4 +1,4 @@
-import { Client as DiscordClient, Guild } from "discord.js";
+import { Client as DiscordClient, Guild, Permissions } from "discord.js";
 import EventEmitter from "events";
 export default Dashboard;
 export { Options };
@@ -60,4 +60,6 @@ declare interface Config {
     noPortIncallbackUrl: boolean;
     secret: string;
     logRequests: boolean;
+    theme: string | object;
+    permissions: Permissions[]
 }

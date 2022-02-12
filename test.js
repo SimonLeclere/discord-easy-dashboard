@@ -20,6 +20,7 @@ client.dashboard = new Dashboard(client, {
 	secret: process.env.DISCORD_SECRET, // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
 	theme: theme, // dark or light
 	logRequests: true,
+	permissions: 'MANAGE_GUILD', // permissions needed to access the dashboard
 });
 
 client.prefixes = {}; // We' ll store the prefixes of each server here
