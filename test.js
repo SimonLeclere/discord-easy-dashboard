@@ -1,6 +1,8 @@
 /* Just for reading env variables */
 require('dotenv').config();
 
+const theme = require('./themes/dark');
+
 /* Require discord.js and discord-easy-dashboard */
 const { Client, Intents } = require('discord.js');
 const Dashboard = require('./');
@@ -16,7 +18,7 @@ client.dashboard = new Dashboard(client, {
 	port: 80,
 	noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
 	secret: process.env.DISCORD_SECRET, // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
-	theme: 'light', // dark or light
+	theme: theme, // dark or light
 	logRequests: true,
 });
 

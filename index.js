@@ -44,13 +44,7 @@ class Dashboard extends EventEmitter {
             secret: options?.secret,
             logRequests: options?.logRequests || false,
             injectCSS: options?.injectCSS || null,
-            theme: options?.theme
-                ? existsSync(join(__dirname, "themes", options.theme))
-                    ? require(join(__dirname, "themes", options.theme))
-                    : existsSync(options.theme)
-                    ? require(options.theme)
-                    : require(join(__dirname, "themes", "light"))
-                : require(join(__dirname, "themes", "light")),
+            theme: this._getTheme(options?.theme),
         };
 
         if (!this.config.secret)
@@ -62,6 +56,13 @@ class Dashboard extends EventEmitter {
         this._checkRoutes();
         this._loadRoutes();
         this._start();
+    }
+
+    _getTheme(theme) {
+        if(!theme) require(join(__dirname, "themes", "light"));
+        if(typeof theme === 'object') return theme;
+        if(!existsSync(join(__dirname, "themes", theme))) throw new Error(`Theme ${theme} not found!`);
+        return require(join(__dirname, "themes", theme));
     }
 
     _setup() {
