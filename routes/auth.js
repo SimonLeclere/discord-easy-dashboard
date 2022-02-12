@@ -1,6 +1,5 @@
 const { Router } = require("express");
-const CheckAuth = (req, res, next) =>
-    req.session.user ? next() : res.status(401).redirect("/auth/login");
+const CheckAuth = (req, res, next) => req.session.user ? next() : res.status(401).redirect("/auth/login");
 const btoa = require("btoa");
 const fetch = require("node-fetch");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -65,13 +64,7 @@ const Auth = Router()
             req.dashboardEmit("newUser", req.session.user);
             res.status(200).redirect("/");
         } else {
-            res.redirect(
-                `https://discordapp.com/api/oauth2/authorize?client_id=${
-                    req.client?.user?.id
-                }&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(
-                    `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`
-                )}`
-            );
+            res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`)}`);
         }
     })
     .get("/logout", [CheckAuth], function (req, res) {

@@ -88,9 +88,7 @@ class Dashboard extends EventEmitter {
 
         this.app.use(
             session({
-                secret: `discord-easy-dashboard-${Date.now()}${
-                    this.client.id
-                }${Math.random().toString(36)}`,
+                secret: `discord-easy-dashboard-${Date.now()}-${this.client.id}-${Math.random().toString(36)}`,
                 resave: false,
                 saveUninitialized: false,
             })
@@ -168,10 +166,25 @@ class Dashboard extends EventEmitter {
         }
     }
 
+    /**
+     * Register a command
+     * @param name - The name of the command.
+     * @param description - A description of the command.
+     * @param usage - The usage string for the command.
+     */
     registerCommand(name, description, usage) {
         this._commands.push({ name, description, usage });
     }
 
+    /**
+     * Adds a text input to the settings page
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param validator - A function that takes the input and returns a boolean indicating whether the
+     * input is valid.
+     * @param setter - a function that takes a value and sets the setting.
+     * @param getter - A function that returns the value of the setting.
+     */
     addTextInput(name, description, validator, setter, getter) {
         this._settings.push({
             name,
@@ -183,14 +196,36 @@ class Dashboard extends EventEmitter {
         });
     }
 
+    /**
+     * Adds a boolean input to the settings page
+     * @param name - The name of the setting.
+     * @param description - A description of the setting.
+     * @param setter - a function that takes a boolean value and sets the setting to that value.
+     * @param getter - A function that returns the current value of the setting.
+     */
     addBooleanInput(name, description, setter, getter) {
         this._settings.push({ name, description, type: "boolean input", set: setter, get: getter });
     }
     
+    /**
+     * Adds a color input to the settings page
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param setter - a function that takes a string and sets the value of the setting.
+     * @param getter - A function that returns the current value of the setting.
+     */
     addColorInput(name, description, setter, getter) {
         this._settings.push({ name, description, type: "color input", set: setter, get: getter });
     }
 
+    /**
+     * It adds a selector to the settings page
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param getSelectorEntries - a function that returns an array of couples [id, value].
+     * @param setter - a function that takes a value and sets the setting.
+     * @param getter - A function that returns the current value of the setting.
+     */
     addSelector(name, description, getSelectorEntries, setter, getter) {
         this._settings.push({
             name,
