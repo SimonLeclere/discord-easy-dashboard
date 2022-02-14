@@ -35,3 +35,7 @@ To create your own theme for the module, read the [Theming](/docs/THEMING.md) se
 Example bot using this package (Click to see screenshots) : https://github.com/SimonLeclere/Dashbot
 
 Example bot using this package and repl.it : https://replit.com/@SimonLeclere/Discord-easy-dashboard?v=1
+
+## Community themes :
+
+- RaphCosmo - By [Raph-exe](https://github.com/raph-exe) - https://www.npmjs.com/package/raphcosmo
