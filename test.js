@@ -24,6 +24,9 @@ client.dashboard = new Dashboard(client, {
 	permissions: 'MANAGE_GUILD', // permissions needed to access the dashboard
 });
 
+// register command test
+client.dashboard.registerCommand('ping', 'Pong!', '!ping');
+
 client.prefixes = {}; // We' ll store the prefixes of each server here
 
 const validatePrefix = (prefix) => prefix.length <= 5; // Only accepts prefixes of up to 5 characters
@@ -39,16 +42,30 @@ client.dashboard.addTextInput(
 	getPrefix,
 );
 
-// register command test
-client.dashboard.registerCommand('ping', 'Pong!', '!ping');
-
-
 client.colors = {}; // We' ll store the colors of each server here
 
 const setColor = (discordClient, guild, value) => (discordClient.colors[guild.id] = value); // Stores the color in the client.colors object
 const getColor = (discordClient, guild) => discordClient.colors[guild.id] || '#ffffff'; // Get the color in the client.colors object or give the default one
 
 client.dashboard.addColorInput('Color', 'The color of the embeds', setColor, getColor);
+
+client.isMegamind = {};
+
+const setMegamind = (discordClient, guild, value) => (discordClient.isMegamind[guild.id] = value); // Stores the megamind in the client.isMegamind object
+const getMegamind = (discordClient, guild) => discordClient.isMegamind[guild.id] || false; // Get the megamind in the client.isMegamind object or give the default one
+client.dashboard.addBooleanInput('Megamind', 'The megamind', setMegamind, getMegamind);
+
+
+client.adminRoles = {};
+
+const getSelectorEntries = (client, guild) => guild.roles.cache.map(role => [role.id, role.name]);
+const adminRoleSetter = (client, guild, value) => (client.adminRoles[guild.id] = value);
+const adminRoleGetter = (client, guild) => {
+	const roleID = client.adminRoles[guild.id];
+	const roleName = guild.roles.cache.get(roleID)?.name
+	return [roleID, roleName];
+};
+client.dashboard.addSelector('Admin role', 'The only role authorized to execute the /admin command', getSelectorEntries, adminRoleSetter, adminRoleGetter);
 
 client.on('ready', () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
 client.dashboard.on('ready', () => {
@@ -59,6 +76,15 @@ client.on('messageCreate', (message) => {
 	const prefix = getPrefix(client, message.guild); // We reuse our function to gain in readability!
 
 	if (message.content.startsWith(prefix + 'ping')) message.reply('Pong !'); // 🏓 :D
+
+	if (message.content.startsWith(prefix + 'admin')) {
+		const adminRole = message.guild.roles.cache.get(client.adminRoles[message.guild.id]);
+		if (adminRole && message.member.roles.cache.has(adminRole.id)) {
+			message.reply('You are authorized to execute the /admin command');
+		} else {
+			message.reply('You are not authorized to execute the /admin command');
+		}
+	}
 
 	// send a red embed
 	if (message.content.startsWith(prefix + 'color')) {
