@@ -30,6 +30,8 @@ To quickly understand how to use the module, you can read [Getting Started](/doc
 
 To create your own theme for the module, read the [Theming](/docs/THEMING.md) section
 
+To learn how to store cookies (recommended), read the [Storing cookies](/docs/STORING_COOKIES.md) section
+
 <br>
 
 Example bot using this package (Click to see screenshots) : https://github.com/SimonLeclere/Dashbot
