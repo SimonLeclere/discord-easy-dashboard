@@ -46,6 +46,7 @@ class Dashboard extends EventEmitter {
             logRequests: options?.logRequests || false,
             injectCSS: options?.injectCSS || null,
             theme: this._getTheme(options?.theme),
+            public: this._getPublic(options?.public),
             permissions: options?.permissions || [Permissions.FLAGS.MANAGE_GUILD],
             session: options?.session || null,
         };
@@ -66,6 +67,13 @@ class Dashboard extends EventEmitter {
         if(typeof theme === 'object') return theme;
         if(!existsSync(join(__dirname, "themes", theme))) throw new Error(`Theme ${theme} not found!`);
         return require(join(__dirname, "themes", theme));
+    }
+    
+    _getPublic(public_files) {
+        if(!public_files) this.app.use(express.static(join(__dirname, "public")));
+        if(typeof public_files === 'object') return public_files;
+        if(!existsSync(join(__dirname, "public", public_files))) throw new Error(`public ${public_files} not found!`);
+        return this.app.use(express.static(join(__dirname, "public", public_files)));
     }
 
     _setup() {
