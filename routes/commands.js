@@ -2,7 +2,7 @@ const { Router } = require("express");
 const CheckAuth = (req, res, next) =>
     req.session.user ? next() : res.status(401).redirect("/auth/login");
 var name = "/commands";
-const Commands = Router().get("/", [checkAuth], function (req, res) {
+const Commands = Router().get("/", [CheckAuth], function (req, res) {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
     let file = req.dashboardConfig.theme["commands"] || "commands.ejs";
 

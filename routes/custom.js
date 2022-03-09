@@ -2,7 +2,7 @@ const { Router } = require("express");
 const CheckAuth = (req, res, next) =>
     req.session.user ? next() : res.status(401).redirect("/auth/login");
 
-const Commands = Router().get("/*", [checkAuth], function (req, res) {
+const Commands = Router().get("/*", [CheckAuth], function (req, res) {
     const path = req.baseUrl.split("/").pop();
     if (!req.dashboardConfig.theme[path]) {
         let file = req.dashboardConfig.theme["404"] || "404.ejs";
