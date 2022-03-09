@@ -9,7 +9,7 @@ const Change = Router().get("/", [CheckAuth], async (req, res) => {
     } else {
         req.dashboardConfig.mode[req.user.id] = "light";
     }
-    res.redirect("/");
+    return res.redirect("/selector");
 });
 
 module.exports.Router = Change;
