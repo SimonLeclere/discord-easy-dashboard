@@ -2,7 +2,7 @@ const { Router } = require("express");
 const CheckAuth = (req, res, next) =>
     req.session.user ? next() : res.status(401).redirect("/auth/login");
 let file = ""
-const Change = Router().get("/", [checkAuth], async (req, res) => {
+const Change = Router().get("/", [CheckAuth], async (req, res) => {
 
     if (req.dashboardConfig.mode[req.user.id] == "light") {
         req.dashboardConfig.mode[req.user.id] == "dark";
