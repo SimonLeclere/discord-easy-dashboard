@@ -152,6 +152,9 @@ class Dashboard extends EventEmitter {
                 case "/manage":
                     routeName = "guild";
                     break;
+                case "/change":
+                    routeName = "change";
+                    break;
                 default:
                     routeName = route.name.split("/")[1];
             }
