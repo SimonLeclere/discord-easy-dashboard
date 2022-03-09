@@ -36,4 +36,4 @@ const Change = Router().get("/", [CheckAuth], async (req, res) => {
 
 module.exports.Router = Change;
 
-module.exports.name = "/change";
+module.exports.name = "/home";
