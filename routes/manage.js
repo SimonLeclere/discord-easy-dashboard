@@ -10,7 +10,10 @@ const Server = Router()
         const member = await guild.members.fetch(req.user.id);
         if (!member || !member.permissions.has("MANAGE_GUILD")) return res.redirect("/selector");
         let file = req.dashboardConfig.theme["guild"] || "guild.ejs";
-
+        
+        if (req.dashboardConfig.mode[req.user.id] == "light") {
+            file = req.dashboardConfig.theme["guildl"] || "guildl.ejs";
+        }
         return await res.render(
             file,
             {

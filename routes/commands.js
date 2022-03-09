@@ -1,9 +1,14 @@
 const { Router } = require("express");
-
-const Commands = Router().get("/", function (req, res) {
+const CheckAuth = (req, res, next) =>
+    req.session.user ? next() : res.status(401).redirect("/auth/login");
+var name = "/commands";
+const Commands = Router().get("/", [checkAuth], function (req, res) {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
     let file = req.dashboardConfig.theme["commands"] || "commands.ejs";
 
+    if (req.dashboardConfig.mode[req.user.id] == "light") {
+        file = req.dashboardConfig.theme["commandsl"] || "commandsl.ejs";
+    }
     res.status(200).render(file, {
         bot: req.client,
         user: req.user,
@@ -14,8 +19,9 @@ const Commands = Router().get("/", function (req, res) {
         port: req.dashboardConfig.port,
         hasClientSecret: Boolean(req.dashboardConfig.secret),
         commands: req.dashboardCommands,
+        mode: req.dashboardConfig.mode
     });
 });
 module.exports.Router = Commands;
 
-module.exports.name = "/commands";
+module.exports.name = name;

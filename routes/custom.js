@@ -1,9 +1,15 @@
 const { Router } = require("express");
+const CheckAuth = (req, res, next) =>
+    req.session.user ? next() : res.status(401).redirect("/auth/login");
 
-const Commands = Router().get("/*", function (req, res) {
+const Commands = Router().get("/*", [checkAuth], function (req, res) {
     const path = req.baseUrl.split("/").pop();
     if (!req.dashboardConfig.theme[path]) {
         let file = req.dashboardConfig.theme["404"] || "404.ejs";
+
+        if (req.dashboardConfig.mode[req.user.id] == "light") {
+            file = req.dashboardConfig.theme["405"] || "404l.ejs";
+        }
         return res.status(404).render(file, {
             bot: req.client,
             user: req.user,

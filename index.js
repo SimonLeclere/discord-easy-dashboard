@@ -36,6 +36,7 @@ class Dashboard extends EventEmitter {
 
         this._commands = [];
         this._settings = [];
+        this._mode = [];
 
         this.config = {
             baseUrl: options?.baseUrl || "http://localhost",
@@ -45,12 +46,13 @@ class Dashboard extends EventEmitter {
             logRequests: options?.logRequests || false,
             injectCSS: options?.injectCSS || null,
             theme: options?.theme
-                ? existsSync(join(__dirname, "themes", options.theme))
-                    ? require(join(__dirname, "themes", options.theme))
-                    : existsSync(options.theme)
-                    ? require(options.theme)
-                    : require(join(__dirname, "themes", "light"))
-                : require(join(__dirname, "themes", "light")),
+                ? existsSync(join(__dirname, "themes", "dark"))
+                    ? require(join(__dirname, "themes", "dark"))
+                    : existsSync(join(__dirname, "themes", "dark"))
+                    ? require(join(__dirname, "themes", "dark"))
+                    : require(join(__dirname, "themes", "dark"))
+                : require(join(__dirname, "themes", "dark")),
+            mode: this._mode,
         };
 
         if (!this.config.secret)

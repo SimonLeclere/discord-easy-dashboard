@@ -1,4 +1,4 @@
-<%- await include("partials/header", { bot, user, path, title: "Select server", is_logged, dashboardDetails, dashboardConfig, hasClientSecret: true }) %>
+<%- await include("partialsl/header", { bot, user, path, title: "Select server", is_logged, dashboardDetails, dashboardConfig, hasClientSecret: true }) %>
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
   <% guilds.forEach(guild => {
@@ -21,4 +21,4 @@
   %>
 </div>
 
-<%- await include("partials/footer") %>
+<%- await include("partialsl/footer") %>
