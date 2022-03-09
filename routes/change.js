@@ -5,12 +5,11 @@ let file = ""
 const Change = Router().get("/", [CheckAuth], async (req, res) => {
 
     if (req.dashboardConfig.mode[req.user.id] == "light") {
-        req.dashboardConfig.mode[req.user.id] == "dark";
+        req.dashboardConfig.mode[req.user.id] = "dark";
         file = req.dashboardConfig.theme["home"] || "index.ejs";
     } else {
         file = req.dashboardConfig.theme["homel"] || "indexl.ejs";
-        req.dashboardConfig.mode[req.user.id] == "light";
-
+        req.dashboardConfig.mode[req.user.id] = "light";
     }
     return await res.render(
         file,
