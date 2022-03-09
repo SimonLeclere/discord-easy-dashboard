@@ -13,5 +13,6 @@ module.exports = {
     selectorl: join(__dirname, BASE_PATH, "selectorl.ejs"),
     commandsl: join(__dirname, BASE_PATH, "commandsl.ejs"),
     405: join(__dirname, BASE_PATH, "404l.ejs"),
-    config: join(__dirname, BASE_PATH, "index.ejs")
+    change: join(__dirname, BASE_PATH, "index.ejs"),
+    changel: join(__dirname, BASE_PATH, "indexl.ejs"),
 };
