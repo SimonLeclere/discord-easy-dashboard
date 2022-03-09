@@ -2,11 +2,13 @@ const { Router } = require("express");
 
 const Home = Router().get("/", async (req, res) => {
     let file = req.dashboardConfig.theme["home"] || "index.ejs";
-    if (!(req.dashboardConfig.mode[req.user.id])) {
-        (req.dashboardConfig.mode[req.user.id]) = "dark";
-    }
-    if (req.dashboardConfig.mode[req.user.id] == "light") {
-        file = req.dashboardConfig.theme["homel"] || "indexl.ejs";
+    if (req.user.id) {
+        if (!(req.dashboardConfig.mode[req.user.id])) {
+            (req.dashboardConfig.mode[req.user.id]) = "dark";
+        }
+        if (req.dashboardConfig.mode[req.user.id] == "light") {
+            file = req.dashboardConfig.theme["homel"] || "indexl.ejs";
+        }
     }
     return await res.render(
         file,
