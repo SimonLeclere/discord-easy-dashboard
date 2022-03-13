@@ -40,4 +40,4 @@ Example bot using this package and repl.it : https://replit.com/@SimonLeclere/Di
 
 ## Community themes :
 
-You can now find community themes in the [themes branch](/../themes)
+- RaphCosmo - By [Raph-exe](https://github.com/raph-exe) - https://www.npmjs.com/package/raphcosmo
