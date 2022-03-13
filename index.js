@@ -53,6 +53,7 @@ class Dashboard extends EventEmitter {
                     : require(join(__dirname, "themes", "dark"))
                 : require(join(__dirname, "themes", "dark")),
             mode: this._mode,
+            session: options?.session || null,
         };
 
         if (!this.config.secret)
@@ -88,15 +89,18 @@ class Dashboard extends EventEmitter {
             this.app.use(morgan("dev"));
         }
 
-        this.app.use(
-            session({
-                secret: `discord-easy-dashboard-${Date.now()}${
-                    this.client.id
-                }${Math.random().toString(36)}`,
-                resave: false,
-                saveUninitialized: false,
-            })
-        );
+        if(this.config.session) {
+            this.app.use(session(this.config.session));
+        }
+        else {
+            this.app.use(
+                session({
+                    secret: `discord-easy-dashboard-${Date.now()}-${this.client.id}-${Math.random().toString(36)}`,
+                    resave: false,
+                    saveUninitialized: false,
+                })
+            );
+        }
 
         this.app.use((req, res, next) => {
             res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
