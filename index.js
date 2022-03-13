@@ -245,6 +245,97 @@ class Dashboard extends EventEmitter {
             get: getter,
         });
     }
+    /**
+     * 
+     * @param {Modal} modal 
+     */
+    addModal(modal) {
+        this._settings.push({
+            name: modal.options.title,
+            type: 'modal',
+            modalOptions: modal.options,
+            modalSettings: modal.settings
+        })
+    }
 }
 
-module.exports = Dashboard;
+class Modal {
+    constructor(options) {
+        this.settings = [];
+        this.options = {
+            title: options?.title || "Modal",
+            openButtonLabel: options?.openButtonLabel || "Open Modal",
+            closeButtonLabel: options?.closeButtonLabel || "Close",
+            saveButtonLabel: options?.saveButtonLabel || "Save",
+        }
+    }
+    
+    /**
+     * Adds a text input to the Modal
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param validator - A function that takes the input and returns a boolean indicating whether the
+     * input is valid.
+     * @param setter - a function that takes a value and sets the setting.
+     * @param getter - A function that returns the value of the setting.
+     * @returns {Modal}
+     */
+    addTextInput(name, description, validator, setter, getter) {
+        this.settings.push({
+            name,
+            description,
+            type: "text input",
+            validator,
+            set: setter,
+            get: getter,
+        });
+        return this;
+    }
+    /**
+     * Adds a boolean input to the Modal
+     * @param name - The name of the setting.
+     * @param description - A description of the setting.
+     * @param setter - a function that takes a boolean value and sets the setting to that value.
+     * @param getter - A function that returns the current value of the setting.
+     * @returns {Modal}
+     */
+    addBooleanInput(name, description, setter, getter) {
+        this.settings.push({ name, description, type: "boolean input", set: setter, get: getter });
+        return this;
+    }
+    /**
+     * Adds a color input to the Modal
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param setter - a function that takes a string and sets the value of the setting.
+     * @param getter - A function that returns the current value of the setting.
+     * @returns {Modal}
+     */
+    addColorInput(name, description, setter, getter) {
+        this.settings.push({ name, description, type: "color input", set: setter, get: getter });
+        return this;
+    }
+    /**
+     * It adds a selector to the Modal
+     * @param name - The name of the setting. This is the name that will be used to access the setting.
+     * @param description - A description of the setting.
+     * @param getSelectorEntries - a function that returns an array of couples [id, value].
+     * @param setter - a function that takes a value and sets the setting.
+     * @param getter - A function that returns the current value of the setting.
+     * @returns {Modal}
+     */
+    addSelector(name, description, getSelectorEntries, setter, getter) {
+        this.settings.push({
+            name,
+            description,
+            type: "selector",
+            getSelectorEntries,
+            set: setter,
+            get: getter,
+        });
+        return this;
+    }
+}
+
+exports.Dashboard = Dashboard;
+exports.Modal = Modal
