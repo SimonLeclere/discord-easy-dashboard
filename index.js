@@ -278,7 +278,6 @@ class Modal {
      * input is valid.
      * @param setter - a function that takes a value and sets the setting.
      * @param getter - A function that returns the value of the setting.
-     * @returns {Modal}
      */
     addTextInput(name, description, validator, setter, getter) {
         this.settings.push({
@@ -289,7 +288,6 @@ class Modal {
             set: setter,
             get: getter,
         });
-        return this;
     }
     /**
      * Adds a boolean input to the Modal
@@ -297,11 +295,10 @@ class Modal {
      * @param description - A description of the setting.
      * @param setter - a function that takes a boolean value and sets the setting to that value.
      * @param getter - A function that returns the current value of the setting.
-     * @returns {Modal}
      */
     addBooleanInput(name, description, setter, getter) {
         this.settings.push({ name, description, type: "boolean input", set: setter, get: getter });
-        return this;
+        
     }
     /**
      * Adds a color input to the Modal
@@ -309,11 +306,10 @@ class Modal {
      * @param description - A description of the setting.
      * @param setter - a function that takes a string and sets the value of the setting.
      * @param getter - A function that returns the current value of the setting.
-     * @returns {Modal}
      */
     addColorInput(name, description, setter, getter) {
         this.settings.push({ name, description, type: "color input", set: setter, get: getter });
-        return this;
+        
     }
     /**
      * It adds a selector to the Modal
@@ -322,7 +318,6 @@ class Modal {
      * @param getSelectorEntries - a function that returns an array of couples [id, value].
      * @param setter - a function that takes a value and sets the setting.
      * @param getter - A function that returns the current value of the setting.
-     * @returns {Modal}
      */
     addSelector(name, description, getSelectorEntries, setter, getter) {
         this.settings.push({
@@ -333,7 +328,7 @@ class Modal {
             set: setter,
             get: getter,
         });
-        return this;
+        
     }
 }
 
