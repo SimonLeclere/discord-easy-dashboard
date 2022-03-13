@@ -8,7 +8,7 @@ const Server = Router()
         if (!guild) return res.redirect("/selector");
 
         const member = await guild.members.fetch(req.user.id);
-        if (!member || !member.permissions.has("ADMINISTRATOR")) return res.redirect("/selector");
+        if (!member || !member.permissions.has(req.dashboardConfig.permissions)) return res.redirect("/selector");
         let file = req.dashboardConfig.theme["guild"] || "guild.ejs";
         
         if (req.dashboardConfig.mode[req.user.id] == "light") {
