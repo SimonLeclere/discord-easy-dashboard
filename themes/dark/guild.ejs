@@ -38,12 +38,12 @@
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
           <input type="color" class="form-control form-control-color" style="height:fit-content" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
         <% } else if(setting.type === 'modal') { %> 
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= setting.modalOptions.title %>-<%= i %>"><%= setting.modalOptions.openButtonLabel %> </button>
-          <div class="modal fade" id="modal-<%= setting.modalOptions.title %>-<%= i %>" tabindex="-1" aria-labelledby="modal-<%= setting.modalOptions.openButtonLabel %>-<%= i %>-label" aria-hidden="true">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= setting.modalOptions.title.split(" ").join("_") %>-<%= i %>"><%= setting.modalOptions.openButtonLabel %> </button>
+          <div class="modal fade" id="modal-<%= setting.modalOptions.title.split(" ").join("_") %>-<%= i %>" tabindex="-1" aria-labelledby="modal-<%= setting.modalOptions.openButtonLabel.split(" ").join("-") %>-<%= i %>-label" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-label" id="modal-<%= setting.modalOptions.title %>-<%= i %>-label"><%= setting.modalOptions.title %></h5>
+                  <h5 class="modal-label" id="modal-<%= setting.modalOptions.openButtonLabel.split(" ").join("-") %>-<%= i %>-label"><%= setting.modalOptions.title %></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
