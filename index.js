@@ -54,7 +54,7 @@ class Dashboard extends EventEmitter {
                 : require(join(__dirname, "themes", "dark")),
             mode: this._mode,
             session: options?.session || null,
-            permissions: options?.permissions || "ADMINISTRATOR"
+            permissions: options?.permissions || [Permissions.FLAGS.ADMINISTRATOR]
         };
 
         if (!this.config.secret)
