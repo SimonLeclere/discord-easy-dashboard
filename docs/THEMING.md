@@ -1,6 +1,6 @@
 # Theming
 discord-easy-dashboard now supports themes !
-You can use one included by default (`dark` or `light`) or make your own. This is a guide to make it easier. You can also find community themes over [here](/../themes)
+You can use one included by default (`dark` or `light`) or make your own. This is a guide to make it easier.
 
 ## Setting up
 1. Create a directory for your new theme: e.g. `my-awesome-theme`
