@@ -11,6 +11,7 @@ const Change = Router().get("/", [CheckAuth], async (req, res) => {
         file = req.dashboardConfig.theme["homel"] || "indexl.ejs";
         req.dashboardConfig.mode[req.user.id] = "light";
     }
+    res.status(401).redirect("/");
     return await res.render(
         file,
         {
