@@ -1,6 +1,9 @@
 <%- await include("./partials/header", { bot, user, path, title: "Select server", is_logged, dashboardDetails, dashboardConfig, hasClientSecret: true }) %>
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+<% if(hasClientSecret) { %>
+      <a class="btn btn-primary text-white" href="/auth/reset"><%- 'Refresh servers' %></a>
+<% } %>
   <% guilds.forEach(guild => {
       const permsOnGuild = new Perms(guild.permissions.toString());
       if(!permsOnGuild.has(dashboardConfig.permissions)) return;
