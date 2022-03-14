@@ -84,7 +84,7 @@ const Auth = Router()
             params.set("code", req.query.code);
             params.set(
                 "redirect_uri",
-                `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`
+                `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/relog`
             );
             let response = await fetch("https://discord.com/api/oauth2/token", {
                 method: "POST",
