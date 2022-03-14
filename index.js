@@ -5,6 +5,9 @@ const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 const ejs = require("ejs");
 const { EventEmitter } = require("events");
+const {
+    Permissions
+} = require("discord.js");
 
 class Dashboard extends EventEmitter {
     constructor(client, options) {
