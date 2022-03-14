@@ -76,7 +76,7 @@ const Auth = Router()
         req.session.destroy();
         res.status(200).redirect("/auth/relog");
     })
-    .get("/relog", [CheckAuth], async (req, res) {
+    .get("/relog", [CheckAuth], async (req, res) => {
         if (req.query.code) {
             /* Obtain token - used to fetch user guilds and user informations */
             const params = new URLSearchParams();
