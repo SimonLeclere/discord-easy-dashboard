@@ -4,7 +4,6 @@
 <a class="btn btn-primary text-white" href="/auth/reset">Refresh servers</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-      <a class="btn btn-primary text-white" href="/auth/reset">Refresh Servers</a>
   <% guilds.forEach(guild => {
       const permsOnGuild = new Perms(guild.permissions.toString());
       if(!permsOnGuild.has(dashboardConfig.permissions)) return;
