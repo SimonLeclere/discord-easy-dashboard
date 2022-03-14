@@ -2,7 +2,7 @@
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
 <% if(hasClientSecret) { %>
-      <a class="btn btn-primary text-white" href="/auth/reset"><%- 'Refresh servers' %></a>
+      <a class="btn btn-primary text-white" href="/auth/reset">Refresh servers</a>
 <% } %>
   <% guilds.forEach(guild => {
       const permsOnGuild = new Perms(guild.permissions.toString());
