@@ -73,10 +73,9 @@ const Auth = Router()
         res.status(200).redirect("/");
     })
     .get("/reset", [CheckAuth], function(req, res) {
-        req.session.destroy();
         res.status(200).redirect("/auth/relog");
     })
-    .get("/relog", async (req, res) => {
+    .get("/relog", [CheckAuth], async (req, res) => {
         if (req.query.code) {
             /* Obtain token - used to fetch user guilds and user informations */
             const params = new URLSearchParams();
@@ -84,7 +83,7 @@ const Auth = Router()
             params.set("code", req.query.code);
             params.set(
                 "redirect_uri",
-                `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/relog`
+                `${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`
             );
             let response = await fetch("https://discord.com/api/oauth2/token", {
                 method: "POST",
@@ -100,7 +99,7 @@ const Auth = Router()
             const tokens = await response.json();
             // If the code isn't valid
             
-            if (tokens.error || !tokens.access_token) return res.redirect("/auth/relog");
+            if (tokens.error || !tokens.access_token) return res.redirect("/auth/login");
             const userData = {
                 infos: null,
                 guilds: null,
@@ -136,7 +135,7 @@ const Auth = Router()
             res.status(200).redirect("/selector");
             req.dashboardConfig.mode[userData.infos.id] = "dark"
         } else {
-            res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/relog`)}`);
+            res.redirect(`/auth/login`);
         }
     });
 module.exports.Router = Auth;
