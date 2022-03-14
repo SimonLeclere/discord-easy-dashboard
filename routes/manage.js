@@ -5,7 +5,7 @@ const CheckAuth = (req, res, next) =>
 const Server = Router()
     .get("/:guildID", CheckAuth, async (req, res) => {
         const guild = req.client.guilds.cache.get(req.params.guildID);
-        if (!guild) return res.redirect("/selector");
+        if (!guild) return res.redirect("/ahq_dash_error");
 
         const member = await guild.members.fetch(req.user.id);
         if (!member || !member.permissions.has(req.dashboardConfig.permissions)) return res.redirect("/selector");
