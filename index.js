@@ -26,7 +26,7 @@ class Dashboard extends EventEmitter {
             description: options?.description || null,
             faviconPath: options?.faviconPath || null,
             serverUrl: options?.serverUrl || null,
-            inviteUrl: options?.inviteUrl || null,
+            inviteUrl: options?.inviteUrl || "https://discord.com/api/oauth2/authorize?client_id=${client?.user?.id}&permissions=8&redirect_uri=${options?.baseUrl}/selector&response_type=code&scope=bot%20applications.commands%20identify",
         };
 
         if (!client.isReady())
