@@ -15,4 +15,6 @@ module.exports = {
     405: join(__dirname, BASE_PATH, "404l.ejs"),
     change: join(__dirname, BASE_PATH, "index.ejs"),
     changel: join(__dirname, BASE_PATH, "indexl.ejs"),
+    ahqcmd: join(__dirname, BASE_PATH, "commands_list.ejs"),
+    ahqcmdl: join(__dirname, BASE_PATH, "commands_listl.ejs"),
 };

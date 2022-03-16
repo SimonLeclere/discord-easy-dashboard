@@ -181,8 +181,8 @@ class Dashboard extends EventEmitter {
         }
     }
 
-    registerCommand(name, description, usage) {
-        this._commands.push({ name, description, usage });
+    registerCommand(name, description, usage, style) {
+        this._commands.push({ name, description, usage, style});
     }
 
     addTextInput(name, description, validator, setter, getter) {
