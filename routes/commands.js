@@ -4,7 +4,7 @@ const CheckAuth = (req, res, next) =>
 var name = "/commands";
 const { Permissions } = require("discord.js");
 
-const Commands = Router().get("/", [CheckAuth], function (req, res) {
+const Commands = Router().get("/", [CheckAuth], async (req, res) => {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
     let file = req.dashboardConfig.theme["ahqcmd"] || "commands_list.ejs";
 
