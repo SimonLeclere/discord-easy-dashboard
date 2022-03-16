@@ -19,7 +19,10 @@ const Commands = Router().get("/", [CheckAuth], function (req, res) {
         port: req.dashboardConfig.port,
         hasClientSecret: Boolean(req.dashboardConfig.secret),
         commands: req.dashboardCommands,
-        mode: req.dashboardConfig.mode
+        mode: req.dashboardConfig.mode,
+        guilds: req.user.guilds.sort((a, b) =>
+        a.name < b.name ? -1 : Number(a.name > b.name)
+        ),
     });
 })
 .get("/:guildID", [CheckAuth], async (req, res) => {
