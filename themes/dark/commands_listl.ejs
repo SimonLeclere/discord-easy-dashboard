@@ -13,7 +13,7 @@
         <h5 class="card-title"><%= guild.name %></h5>
         <% if (bot.guilds.cache.get(guild.id)) { %>
           <a href="/commands/<%- guild.id %>" class="btn btn-success text-white">View Commands</a>
-        <% }
+        <% } %>
       </div>
     </div>
   <%

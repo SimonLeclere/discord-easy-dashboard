@@ -52,13 +52,6 @@ const Commands = Router().get("/", [CheckAuth], async (req, res) => {
             user: req.user,
             is_logged: Boolean(req.session.user),
             guild,
-            alert:
-                errors.length > 0
-                    ? `The following items are invalid and have not been saved: ${errors.join(
-                          ", "
-                      )}.`
-                    : "Your settings have been saved.",
-            errors: errors.length > 0,
             dashboardDetails: req.dashboardDetails,
             dashboardConfig: req.dashboardConfig,
             settings: req.dashboardSettings,
