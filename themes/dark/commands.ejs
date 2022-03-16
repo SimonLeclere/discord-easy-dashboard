@@ -17,7 +17,7 @@
         <tbody>
                 <% for (let i = 0; i < commands.length; i++) { %>
                     <tr>
-                        <th scope="row"><%= rank + 1 %></th>
+                        <th scope="row"><%= i + 1 %></th>
                         <td><%= commands[i].name %></td>
                         <td><%= commands[i].description %></td>
                         <td><%= (await commands[i].style(command.usage, guild) || commands[i].usage) %></td>
