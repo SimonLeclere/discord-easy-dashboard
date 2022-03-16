@@ -26,7 +26,7 @@ const Commands = Router().get("/", [CheckAuth], function (req, res) {
     });
 })
 .get("/:guildID", [CheckAuth], async (req, res) => {
-    const guild = req.client.guilds.cache.get(req.params.guildId);
+    const guild = req.client.guilds.cache.get(req.params.guildID);
     if (!guild) return res.status(405).redirect("/405_error");
     if (req.dashboardCommands.length === 0) return res.redirect("/");
     let file = req.dashboardConfig.theme["commands"] || "commands.ejs";
