@@ -15,16 +15,14 @@
             </tr>
         </thead>
         <tbody>
-            <% guilds.forEach(guild => { %>
-                <% commands.forEach(async (command, rank) => { %>
-                    <tr>
-                        <th scope="row"><%= rank + 1 %></th>
-                        <td><%= command.name %></td>
-                        <td><%= command.description %></td>
-                        <td><%= (await command.style(command.usage) || command.usage) %></td>
-                    </tr>
-                <% }); %>
-            <% });%>
+            <% commands.forEach(async (command, rank) => { %>
+                <tr>
+                    <th scope="row"><%= rank + 1 %></th>
+                    <td><%= command.name %></td>
+                    <td><%= command.description %></td>
+                    <td><%= (await command.style(command.usage, guild) || command.usage) %></td>
+                </tr>
+            <% }); %>
         </tbody>
       </table>
     

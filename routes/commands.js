@@ -6,10 +6,10 @@ const { Permissions } = require("discord.js");
 
 const Commands = Router().get("/", [CheckAuth], async (req, res) => {
     if (req.dashboardCommands.length === 0) return res.redirect("/");
-    let file = req.dashboardConfig.theme["ahqcmd"] || "commands_list.ejs";
+    let file = req.dashboardConfig.theme["commands_list"] || "commands_list.ejs";
 
     if (req.dashboardConfig.mode[req.user.id] == "light") {
-        file = req.dashboardConfig.theme["ahqcmdl"] || "commands_listl.ejs";
+        file = req.dashboardConfig.theme["commands_listl"] || "commands_listl.ejs";
     }
     return await res.render(
         file,
