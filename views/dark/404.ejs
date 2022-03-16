@@ -1,0 +1,12 @@
+<%- await include("partials/header", { bot, user, title: "Not found", is_logged, dashboardDetails, dashboardConfig, hasClientSecret }) %>
+<div class="container-sm center" style="margin-top: 25px;">
+    <a class="btn btn-primary text-white" href="/auth/reset">Refresh servers</a>
+</div>
+<div class="container-sm center" style="margin-top: 25px;">
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <h1>404</h1>
+        <h2>Not found</h2>
+        <a class="btn btn-secondary" href="/">Home</a>
+    </div>
+</div>
+<%- await include("partials/footer") %>

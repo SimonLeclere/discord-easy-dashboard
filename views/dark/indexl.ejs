@@ -1,0 +1,29 @@
+<%- await include("partialsl/header", { bot, user, title: "Home", is_logged, dashboardDetails, dashboardConfig, hasClientSecret }) %>
+
+<div class="container-sm center" style="margin-top: 25px;">
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <h2>Welcome to <%= dashboardDetails.name %> Dashboard!</h2>
+    
+    <% if(dashboardDetails.description) { %>
+      <p><%= dashboardDetails.description %></p>
+    <% } %>
+
+    <% if(hasClientSecret) { %>
+      <a class="btn btn-secondary text-white" href="/selector"><%- is_logged ? 'Dashboard' : 'Login to access the dashboard' %></a>
+    <% } %>
+
+    <% if(commands.length > 0) { %>
+      <a class="btn btn-secondary text-white" href="/commands">Command list</a>
+    <% } %>
+
+    <hr>
+      
+    <a class="btn btn-primary text-white" href="<%= dashboardDetails.inviteUrl ? dashboardDetails.inviteUrl : `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&scope=bot&permissions=8` %>">Invite</a>
+    
+    <% if(dashboardDetails.serverUrl) { %>
+      <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>
+    <% } %>
+
+  </div>
+</div>
+<%- await include("partialsl/footer") %>

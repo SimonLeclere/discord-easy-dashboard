@@ -1,0 +1,36 @@
+<%- await include("partialsl/header", { bot, user, title: "Home", is_logged, dashboardDetails, dashboardConfig, hasClientSecret }) %>
+
+<div class="container-sm center" style="margin-top: 25px;">
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <h2><%= guild.name %>'s commands</h2>
+    <hr>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i = 0; i < commands.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= i + 1 %></th>
+                    <td><%= commands[i].name %></td>
+                    <td><%= commands[i].description %></td>
+                    <td><%= (await commands[i].style(commands[i].usage, guild) || commands[i].usage) %></td>
+                </tr>
+            <% } %>
+        </tbody>
+      </table>
+    
+    <% if(dashboardDetails.serverUrl) { %>
+        <p>Need more help ?</p>
+        <a class="btn btn-warning" href="<%= dashboardDetails.serverUrl %>">Discord Server</a>
+    <% } %>
+
+  </div>
+</div>
+<%- await include("partialsl/footer") %>

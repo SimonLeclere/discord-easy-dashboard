@@ -1,0 +1,51 @@
+<%- await include("partials/header", { bot, user, title: `Settings | ${guild.name}`, is_logged, dashboardConfig, hasClientSecret: true }) %>
+
+<div class="container-sm center" style="margin-top: 30px;">
+  <div class="d-grid gap-2 col-4 mx-auto">
+    <% if (alert) { %>
+      <div class="alert <%= errors ? 'alert-danger' : 'alert-success' %>" role="alert">
+        <%= alert %>
+      </div>
+    <% } %>
+    <h1><%= guild.name %></h1>
+    <hr>
+    <form method="POST">
+
+      <% for (let i = 0; i < settings.length; i++) { %>
+        <% const setting = settings[i] %> 
+        <% if (setting.type === 'text input') { %>
+          <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
+          <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
+          <input type="text" class="form-control" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
+        <% } else if (setting.type === 'boolean input') { %>
+          <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
+          <div class="form-check form-switch">
+            <input type='hidden' value='off' name='<%= setting.name %>'>
+            <input class="form-check-input" type="checkbox" name="<%= setting.name %>" id="<%= setting.name %>" <%= await setting.get(bot, guild) ? 'checked' : '' %>>
+            <label class="form-check-label" for="<%= setting.name %>"><%= setting.description %></label>
+          </div>
+        <% } else if (setting.type === 'selector') { %>
+          <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
+          <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
+          <select class="form-select" aria-label="<%= setting.description %>" name='<%= setting.name %>'>
+            <option value="<%=  setting.get(bot, guild)[0] %>" selected><%=  await setting.get(bot, guild)[1] %></option>
+            <% (await setting.getSelectorEntries(bot, guild)).forEach(x => { %>
+              <option value="<%= x[0] %>"><%= x[1] %></option>
+            <% }) %>
+          </select>
+        <% } else if(setting.type === 'color input') { %>
+          <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
+          <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
+          <input type="color" class="form-control form-control-color" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
+        <% } %>  
+          <% if (i !== settings.length) { %>
+            <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">
+          <% } %>
+      <% } %>
+      
+      <br><button type="submit" class="btn btn-success text-white">Save Settings</button>
+    </form>
+  </div>
+</div>
+
+<%- await include("partials/footer") %>
