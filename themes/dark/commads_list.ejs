@@ -3,7 +3,7 @@
     <a class="btn btn-primary text-white" href="/auth/reset">Refresh servers</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <% guilds.forEach(async (guild) => {
+  <% guilds.forEach(guild => {
       if (!(bot.guilds.cache.get(guild.id))) return;
   
     <div class="card" style="width: 18rem; margin: 2rem;">
