@@ -45,19 +45,32 @@ const Commands = Router().get("/", [CheckAuth], function (req, res) {
     if (req.dashboardConfig.mode[req.user.id] == "light") {
         file = req.dashboardConfig.theme["commandsl"] || "commandsl.ejs";
     }
-    res.status(200).render(file, {
-        bot: req.client,
-        user: req.user,
-        is_logged: Boolean(req.session.user),
-        dashboardDetails: req.dashboardDetails,
-        dashboardConfig: req.dashboardConfig,
-        baseUrl: req.dashboardConfig.baseUrl,
-        port: req.dashboardConfig.port,
-        hasClientSecret: Boolean(req.dashboardConfig.secret),
-        commands: req.dashboardCommands,
-        mode: req.dashboardConfig.mode,
-        guild
-    });
+    return await res.render(
+        file,
+        {
+            bot: req.client,
+            user: req.user,
+            is_logged: Boolean(req.session.user),
+            guild,
+            alert:
+                errors.length > 0
+                    ? `The following items are invalid and have not been saved: ${errors.join(
+                          ", "
+                      )}.`
+                    : "Your settings have been saved.",
+            errors: errors.length > 0,
+            dashboardDetails: req.dashboardDetails,
+            dashboardConfig: req.dashboardConfig,
+            settings: req.dashboardSettings,
+        },
+        (err, html) => {
+            if (err) {
+                res.status(404).send(err.message);
+                return console.error(error);
+            }
+            res.status(200).send(html)
+        }
+    );
 
 });
 module.exports.Router = Commands;
