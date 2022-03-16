@@ -26,6 +26,7 @@ const Commands = Router().get("/", [CheckAuth], async (req, res) => {
             port: req.dashboardConfig.port,
             dashboardDetails: req.dashboardDetails,
             dashboardConfig: req.dashboardConfig,
+            hasClientSecret: Boolean(req.dashboardConfig.secret),
         },
         (err, html) => {
             if (err) {
@@ -55,12 +56,13 @@ const Commands = Router().get("/", [CheckAuth], async (req, res) => {
             dashboardDetails: req.dashboardDetails,
             dashboardConfig: req.dashboardConfig,
             settings: req.dashboardSettings,
-            commands: req.daashboardCommands
+            commands: req.daashboardCommands,
+            hasClientSecret: Boolean(req.dashboardConfig.secret),
         },
         (err, html) => {
             if (err) {
                 res.status(404).send(err.message);
-                return console.error(error);
+                return console.error(err);
             }
             res.status(200).send(html)
         }
