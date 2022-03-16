@@ -15,12 +15,12 @@
             </tr>
         </thead>
         <tbody>
-            <% commands.forEach(async (command, rank) => { %>
+            <% for (let i = 0; i < commands.length; i++) { %>
                 <tr>
                     <th scope="row"><%= rank + 1 %></th>
-                    <td><%= command.name %></td>
-                    <td><%= command.description %></td>
-                    <td><%= (await command.style(command.usage, guild) || command.usage) %></td>
+                    <td><%= commands[i].name %></td>
+                    <td><%= commands[i].description %></td>
+                    <td><%= (await commands[i].style(command.usage, guild) || commands[i].usage) %></td>
                 </tr>
             <% }); %>
         </tbody>
