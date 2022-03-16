@@ -22,7 +22,7 @@
                         <td><%= commands[i].description %></td>
                         <td><%= (await commands[i].style(command.usage, guild) || commands[i].usage) %></td>
                     </tr>
-                <% }); %>
+                <% } %>
         </tbody>
       </table>
     
