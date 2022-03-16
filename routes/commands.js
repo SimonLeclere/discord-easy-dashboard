@@ -56,7 +56,7 @@ const Commands = Router().get("/", [CheckAuth], async (req, res) => {
             dashboardDetails: req.dashboardDetails,
             dashboardConfig: req.dashboardConfig,
             settings: req.dashboardSettings,
-            commands: req.daashboardCommands,
+            commands: req.dashboardCommands,
             hasClientSecret: Boolean(req.dashboardConfig.secret),
         },
         (err, html) => {
