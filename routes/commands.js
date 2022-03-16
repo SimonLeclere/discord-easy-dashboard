@@ -62,6 +62,7 @@ const Commands = Router().get("/", [CheckAuth], function (req, res) {
             dashboardDetails: req.dashboardDetails,
             dashboardConfig: req.dashboardConfig,
             settings: req.dashboardSettings,
+            commands: req.daashboardCommands
         },
         (err, html) => {
             if (err) {
