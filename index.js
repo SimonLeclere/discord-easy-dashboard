@@ -73,7 +73,7 @@ class Dashboard extends EventEmitter {
 
     _setup() {
         this.app.set("port", this.config.port || 3000);
-        this.app.set("views", join(__dirname, "views", "dark"));
+        this.app.set("views", join(__dirname, "themes", "dark"));
         this.app.set("view engine", "ejs");
         this.app.engine("ejs", async (path, data, cb) => {
             try {
