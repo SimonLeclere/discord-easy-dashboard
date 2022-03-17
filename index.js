@@ -73,7 +73,7 @@ class Dashboard extends EventEmitter {
 
     _setup() {
         this.app.set("port", this.config.port || 3000);
-        this.app.set("views", join(__dirname, "views"));
+        this.app.set("views", join(__dirname, "themes", "dark"));
         this.app.set("view engine", "ejs");
         this.app.engine("ejs", async (path, data, cb) => {
             try {
@@ -181,8 +181,13 @@ class Dashboard extends EventEmitter {
         }
     }
 
-    registerCommand(name, description, usage) {
-        this._commands.push({ name, description, usage });
+    registerCommand(name, description, usage, style) {
+        this._commands.push({ 
+            name, 
+            description, 
+            usage, 
+            style: style
+        });
     }
 
     addTextInput(name, description, validator, setter, getter) {

@@ -15,4 +15,6 @@ module.exports = {
     405: join(__dirname, BASE_PATH, "404l.ejs"),
     change: join(__dirname, BASE_PATH, "index.ejs"),
     changel: join(__dirname, BASE_PATH, "indexl.ejs"),
+    commands_list: join(__dirname, BASE_PATH, "commands_list.ejs"),
+    commands_listl: join(__dirname, BASE_PATH, "commands_listl.ejs"),
 };
