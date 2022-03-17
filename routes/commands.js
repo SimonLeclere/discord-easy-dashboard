@@ -10,6 +10,8 @@ const Commands = Router().get("/", [CheckAuth], async (req, res) => {
 
     if (req.dashboardConfig.mode[req.user.id] == "light") {
         file = req.dashboardConfig.theme["commands_listl"] || "commands_listl.ejs";
+    } else {
+        file = req.dashboardConfig.theme["commands_list"] || "commands_list.ejs";
     }
     return await res.render(
         file,
