@@ -49,14 +49,6 @@ If your dashboard has the following settings:
 ```
 You have to go to the page `https://discord.com/developers/applications`, in the section OAuth2 and add as a redirectURI `http://localhost:3000/auth/login`.
 
-## Ready event
-
-```js
-client.dashboard.on('ready', () => {
-    console.log(`Dashboard launched on port ${config.port} - ${config.baseUrl}${config.port === 80 ? '' : ':' + config.port}`);
-});
-```
-
 ## Command list page
 
 To add a page listing the commands of your bot, you have to register at least one command with the `registerCommand` function. This one takes 3 parameters : the name of the command, a description of what it does and how to use it.

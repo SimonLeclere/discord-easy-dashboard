@@ -166,10 +166,10 @@ class Dashboard extends EventEmitter {
                 );
         }
     }
+
     _start() {
         try {
             this.app.listen(this.app.get("port"));
-            this.emit("ready");
         } catch (e) {
             throw new Error(e);
         }

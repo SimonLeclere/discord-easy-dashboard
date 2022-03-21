@@ -68,9 +68,6 @@ const adminRoleGetter = (client, guild) => {
 client.dashboard.addSelector('Admin role', 'The only role authorized to execute the /admin command', getSelectorEntries, adminRoleSetter, adminRoleGetter);
 
 client.on('ready', () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
-client.dashboard.on('ready', () => {
-	console.log(`Dashboard launched on port ${client.dashboard.config.port} - ${client.dashboard.config.baseUrl}${client.dashboard.config.port === 80 ? '' : ':' + client.dashboard.config.port}`);
-});
 
 client.on('messageCreate', (message) => {
 	const prefix = getPrefix(client, message.guild); // We reuse our function to gain in readability!
