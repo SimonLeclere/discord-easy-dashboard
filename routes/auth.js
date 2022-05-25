@@ -37,7 +37,7 @@ const Auth = Router()
             while (!userData.infos || !userData.guilds) {
                 /* User infos */
                 if (!userData.infos) {
-                    response = await fetch("http://discordapp.com/api/users/@me", {
+                    response = await fetch("http://discord.com/api/users/@me", {
                         method: "GET",
                         headers: { Authorization: `Bearer ${tokens.access_token}` },
                     });
@@ -47,7 +47,7 @@ const Auth = Router()
                 }
                 /* User guilds */
                 if (!userData.guilds) {
-                    response = await fetch("https://discordapp.com/api/users/@me/guilds", {
+                    response = await fetch("https://discord.com/api/users/@me/guilds", {
                         method: "GET",
                         headers: { Authorization: `Bearer ${tokens.access_token}` },
                     });
@@ -64,7 +64,7 @@ const Auth = Router()
             req.dashboardEmit("newUser", req.session.user);
             res.status(200).redirect("/");
         } else {
-            res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`)}`);
+            res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`)}`);
         }
     })
     .get("/logout", [CheckAuth], function (req, res) {
