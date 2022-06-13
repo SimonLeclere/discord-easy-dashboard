@@ -12,7 +12,7 @@
     <form method="POST">
 
       <% for (let i = 0; i < settings.length; i++) { %>
-        <% const setting = settings[i] %> 
+        <% const setting = settings[i];%> 
         <% if (setting.type === 'text input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
@@ -36,7 +36,56 @@
         <% } else if(setting.type === 'color input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
-          <input type="color" class="form-control form-control-color" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
+          <input type="color" class="form-control form-control-color" style="height:fit-content" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
+        <% } else if(setting.type === 'modal') { %> 
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-<%= setting.modalOptions.title.split(" ").join("_") %>-<%= i %>"><%= setting.modalOptions.openButtonLabel %> </button>
+          <div class="modal fade" id="modal-<%= setting.modalOptions.title.split(" ").join("_") %>-<%= i %>" tabindex="-1" aria-labelledby="modal-<%= setting.modalOptions.openButtonLabel.split(" ").join("-") %>-<%= i %>-label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-label" id="modal-<%= setting.modalOptions.openButtonLabel.split(" ").join("-") %>-<%= i %>-label"><%= setting.modalOptions.title %></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  
+                    <% for (let i = 0; i < setting.modalSettings.length; i++) { %>
+                      <% const mSetting = setting.modalSettings[i]; %> 
+                      <% if (mSetting.type === 'text input') { %>
+                        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= mSetting.name %></p>
+                        <p style="font-style: italic;" class="disabled"><%= mSetting.description %></p>
+                        <input type="text" class="form-control" name="<%= mSetting.name %>" id="<%= mSetting.name %>" value="<%= await mSetting.get(bot, guild) %>">
+                      <% } else if (mSetting.type === 'boolean input') { %>
+                        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= mSetting.name %></p>
+                        <div class="form-check form-switch">
+                          <input type='hidden' value='off' name='<%= mSetting.name %>'>
+                          <input class="form-check-input" type="checkbox" name="<%= mSetting.name %>" id="<%= mSetting.name %>" <%= await mSetting.get(bot, guild) ? 'checked' : '' %>>
+                          <label class="form-check-label" for="<%= mSetting.name %>"><%= mSetting.description %></label>
+                        </div>
+                      <% } else if (mSetting.type === 'selector') { %>
+                        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= mSetting.name %></p>
+                        <p style="font-style: italic;" class="disabled"><%= mSetting.description %></p>
+                        <select class="form-select" aria-label="<%= mSetting.description %>" name='<%= mSetting.name %>'>
+                          <option value="<%=  mSetting.get(bot, guild)[0] %>" selected><%=  await mSetting.get(bot, guild)[1] %></option>
+                          <% (await mSetting.getSelectorEntries(bot, guild)).forEach(x => { %>
+                            <option value="<%= x[0] %>"><%= x[1] %></option>
+                          <% }) %>
+                        </select>
+                      <% } else if(mSetting.type === 'color input') { %>
+                        <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= mSetting.name %></p>
+                        <p style="font-style: italic;" class="disabled"><%= mSetting.description %></p>
+                        <input type="color" class="form-control form-control-color" style="height:fit-content" name="<%= mSetting.name %>" id="<%= mSetting.name %>" value="<%= await mSetting.get(bot, guild) %>">
+                      <% } %>
+                    <% } %>                
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= setting.modalOptions.closeButtonLabel %></button>
+                      <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"><%= setting.modalOptions.saveButtonLabel %></button>
+                    </div>
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
         <% } %> 
           <% if (i !== settings.length) { %>
             <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">

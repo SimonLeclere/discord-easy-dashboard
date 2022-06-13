@@ -43,13 +43,12 @@ const Server = Router()
 
 		const errors = [];
 		Object.keys(req.body).forEach((item) => {
-			const setting = req.dashboardSettings.find((x) => x.name === item);
-			if (!setting) return;
 
+			const setting = req.dashboardSettings.find((x) => x.name === item) || req.dashboardSettings.filter(x => x.type === 'modal').find(m => m.modalSettings.find(s => s.name === item)).modalSettings.find(s => s.name === item);
+			if (!setting) return;
 			if (setting.validator && !setting.validator(req.body[item])) return errors.push(item);
 
 			if (setting.type === 'boolean input') req.body[item] = Array.isArray(req.body[item]) ? true : false;
-
 			setting.set(req.client, guild, req.body[item]);
 		});
 		const file = req.dashboardConfig.theme['guild'] || 'guild.ejs';

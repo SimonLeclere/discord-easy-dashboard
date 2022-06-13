@@ -11,7 +11,7 @@ const client = new Discord.Client();
 const Dashboard = require("discord-easy-dashboard");
 
 // Initialise it
-const dashboard = new Dashboard(client)
+const dashboard = new Dashboard.Dashboard(client)
 
 // We now have a dashboard property to access everywhere!
 client.dashboard = dashboard;
@@ -76,9 +76,23 @@ For this discord-easy-dashboard provides several methods:
 - `addBooleanInput(name, description, setter, getter)` - Adds a switch that takes either the value `true` or `false`. The setter and getter parameters are similar to those detailed above.
 - `addSelector(name, description, getSelectorEntries, setter, getter)` - Allows you to add a selector that takes the form of a dropdown menu. You can use it to ask the user to choose a role or a channel. The getSelectorEntries() function takes as parameters the discord client and the guild object and must return a list of couples [id, name]. The getter function should also return a couple [id, name].
 - `addColorInput(name, description, setter, getter)` - Adds a color picker. The setter and getter parameters are similar to those detailed above.
+- `addModal(Modal)` - Adds a Modal, see below.
+
+
+
+### Modals
+Once created, Modals act extrememly similar to the base dashboard. You add settings the same way, just to a modal instead. See below for an example:
+```js
+var modal = new Dashboard.Modal({ //These are all the available options for Modals
+        title: "Modal",
+        openButtonLabel: "Open Modal",
+        closeButtonLabel: "Close",
+        saveButtonLabel: "Save",
+})
+```
+Then you can add settings to the modal using `modal.addYourSetting(and, its, args)`
 
 Now with these few functions it is quite simple to create a basic dashboard. Let's see below an example that allows the user to choose a custom prefix for his server:
-
 ```js
 /* Require discord.js and discord-easy-dashboard */
 const { Client, Intents } = require('discord.js');
@@ -88,7 +102,7 @@ const Dashboard = require('discord-easy-dashboard');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 /* Initiate the Dashboard class and attach it to the discord client for easy access */
-client.dashboard = new Dashboard(client, {
+client.dashboard = new Dashboard.Dashboard(client, {
     name: 'DashBot', // Bot's name
     description: 'A super cool bot with an online dashboard!', // Bot's description
     baseUrl: 'http://localhost', // Leave this if ur in local development
@@ -129,7 +143,7 @@ You can easily change the colors, the background, ... of the dashboard by using 
 For example, to change the background colors of the dashboard, you can use the following code:
 
 ```js
-client.dashboard = new Dashboard(client, {
+client.dashboard = new Dashboard.Dashboard(client, {
     // other options
     injectCSS: `
 	body {

@@ -18,7 +18,7 @@ module.exports = {
     404: join(__dirname, BASE_PATH, "404.ejs")
 };
 ```
-3. If you want to start from a template (recommanded), you can copy the following files to your **directory root**: [selector.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/selector.ejs), [commands.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/commands.ejs), [guild.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/), [index.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/index.ejs).
+3. If you want to start from a template (recommended), you can copy the following files to your **directory root**: [selector.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/selector.ejs), [commands.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/commands.ejs), [guild.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/), [index.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/index.ejs).
 And these to a `partials` directory: [footer.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/partials/footer.ejs), [header.ejs](https://github.com/SimonLeclere/discord-easy-dashboard/blob/master/themes/light/partials/header.ejs)
 
 ## Editing
