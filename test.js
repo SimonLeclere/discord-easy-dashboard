@@ -12,7 +12,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 
 /* Initiate the Dashboard class and attach it to the discord client for easy access */
-client.dashboard = new Dashboard(client, {
+client.dashboard = new Dashboard.Dashboard(client, {
 	name: 'DashBot', // Bot's name
 	description: 'A super cool bot with an online dashboard!', // Bot's description
 	baseUrl: 'http://localhost', // Leave this if ur in local development
@@ -66,6 +66,30 @@ const adminRoleGetter = (client, guild) => {
 	return [roleID, roleName];
 };
 client.dashboard.addSelector('Admin role', 'The only role authorized to execute the /admin command', getSelectorEntries, adminRoleSetter, adminRoleGetter);
+
+
+client.titles = {};
+const validateTitle = (title) => {return true}
+const getTitle = (discordClient, guild) => discordClient.titles[guild.id] || "Default"
+const setTitle = (discordClient, guild, value) => discordClient.titles[guild.id] = value
+
+//Let's create a modal
+
+var modal = new Dashboard.Modal({ //Initialize the modal
+	title: "My Modal",
+	openButtonLabel: "Open the Modal!",
+	closeButtonLabel: "Close",
+	saveButtonLabel: "Save"
+}) 
+modal.addTextInput( //Modals are just like the main dashboard, you add components the same way
+	'Title',
+	'The title that is added to an Embed.',
+	validateTitle,
+	setTitle,
+	getTitle,
+);
+
+client.dashboard.addModal(modal) //And finally add the modal
 
 client.on('ready', () => console.log(`${client.user.tag} is ready !`)); // To know when the bot is launched
 
