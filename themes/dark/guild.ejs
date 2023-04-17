@@ -36,7 +36,7 @@
         <% } else if(setting.type === 'color input') { %>
           <p class="h5" style="margin-bottom: 0.5rem; margin-top: 10px;"><%= setting.name %></p>
           <p style="font-style: italic;" class="disabled"><%= setting.description %></p>
-          <input type="color" class="form-control form-control-color" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
+          <input type="color" class="form-control form-control-color" style="height: fit-content;" name="<%= setting.name %>" id="<%= setting.name %>" value="<%= await setting.get(bot, guild) %>">
         <% } %>  
           <% if (i !== settings.length) { %>
             <hr style="width:40%; display: block; margin-left: auto; margin-right: auto;">

@@ -26,6 +26,8 @@ client.dashboard = new Dashboard(client, {
 
 // register command test
 client.dashboard.registerCommand('ping', 'Pong!', '!ping');
+client.dashboard.registerCommand('color', 'Get the color embed', '!color');
+client.dashboard.registerCommand('admin', 'Can only be used by the admin role', '!admin');
 
 client.prefixes = {}; // We' ll store the prefixes of each server here
 
@@ -62,7 +64,7 @@ const getSelectorEntries = (client, guild) => guild.roles.cache.map(role => [rol
 const adminRoleSetter = (client, guild, value) => (client.adminRoles[guild.id] = value);
 const adminRoleGetter = (client, guild) => {
 	const roleID = client.adminRoles[guild.id];
-	const roleName = guild.roles.cache.get(roleID)?.name
+	const roleName = guild.roles.cache.get(roleID) ? guild.roles.cache.get(roleID).name : null;
 	return [roleID, roleName];
 };
 client.dashboard.addSelector('Admin role', 'The only role authorized to execute the /admin command', getSelectorEntries, adminRoleSetter, adminRoleGetter);
