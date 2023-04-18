@@ -5,6 +5,8 @@ const { existsSync, readdirSync } = require('fs');
 const { join } = require('path');
 const ejs = require('ejs');
 const { EventEmitter } = require('events');
+const { PermissionsBitField } = require('discord.js');
+
 
 class Dashboard extends EventEmitter {
 	constructor(client, options) {
@@ -69,6 +71,19 @@ class Dashboard extends EventEmitter {
 		return require(join(__dirname, 'themes', theme));
 	}
 
+
+	_deserializePermissions(permissions) {
+		const permissionsInt = BigInt(permissions);
+		const permissionsObj = {};
+
+		// Iterate over each permission flag in the table
+		for (const [permissionName, permissionFlag] of Object.entries(PermissionsBitField.Flags)) {
+			permissionsObj[permissionName] = (permissionsInt & BigInt(permissionFlag)) !== 0n;
+		}
+
+		return permissionsObj;
+	}
+
 	_setup() {
 		this.app.set('port', this.config.port || 3000);
 		this.app.set('views', join(__dirname, 'views'));
@@ -118,6 +133,7 @@ class Dashboard extends EventEmitter {
 			req.dashboardCommands = this._commands;
 			req.client = this.client;
 			req.dashboardEmit = (...args) => this.emit(...args);
+			req.deserializePermissions = (permissions) => this._deserializePermissions(permissions);
 			req.dashboardSettings = this._settings;
 
 			next();

@@ -22,7 +22,7 @@ client.dashboard = new Dashboard(client, {
 	secret: process.env.DISCORD_SECRET, // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
 	theme, // dark or light
 	logRequests: true,
-	permissions: ['ManageGuild'], // permissions needed to access the dashboard
+	permissions: ['IMPOSSIBLE'], // permissions needed to access the dashboard
 	faviconPath: join(__dirname, 'favicon.ico'), // path to the favicon
 });
 

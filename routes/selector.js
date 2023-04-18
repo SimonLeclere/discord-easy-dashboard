@@ -1,19 +1,5 @@
 const { Router } = require('express');
-const CheckAuth = (req, res, next) =>
-	req.session.user ? next() : res.status(401).redirect('/auth/login');
-const { PermissionsBitField } = require('discord.js');
-
-function deserializePermissions(permissions) {
-	const permissionsInt = BigInt(permissions);
-	const permissionsObj = {};
-
-	// Iterate over each permission flag in the table
-	for (const [permissionName, permissionFlag] of Object.entries(PermissionsBitField.Flags)) {
-		permissionsObj[permissionName] = (permissionsInt & BigInt(permissionFlag)) !== 0n;
-	}
-
-	return permissionsObj;
-}
+const CheckAuth = (req, res, next) => req.session.user ? next() : res.status(401).redirect('/auth/login');
 
 const Selector = Router().get('/', CheckAuth, async (req, res) => {
 	const file = req.dashboardConfig.theme.selector || 'selector.ejs';
@@ -27,7 +13,7 @@ const Selector = Router().get('/', CheckAuth, async (req, res) => {
 				a.name < b.name ? -1 : Number(a.name > b.name),
 			),
 			is_logged: Boolean(req.session.user),
-			deserializePermissions,
+			deserializePermissions: req.deserializePermissions,
 			path: req.path,
 			baseUrl: req.dashboardConfig.baseUrl,
 			port: req.dashboardConfig.port,

@@ -8,7 +8,13 @@ const Server = Router()
 		if (!guild) return res.redirect('/selector');
 
 		const member = await guild.members.fetch(req.user.id);
-		if (!member || !member.permissions.has(req.dashboardConfig.permissions)) return res.redirect('/selector');
+		if (!member) return res.redirect('/selector');
+
+		const permissions = req.deserializePermissions(member.permissions);
+		const hasPermissions = req.dashboardConfig.permissions.every((p) => permissions[p] === true);
+
+		if (!hasPermissions) return res.redirect('/selector');
+
 		const file = req.dashboardConfig.theme.guild || 'guild.ejs';
 
 		return await res.render(
@@ -39,7 +45,11 @@ const Server = Router()
 
 		const member = await guild.members.fetch(req.user.id);
 		if (!member) return res.redirect('/selector');
-		if (!member.permissions.has(req.dashboardConfig.permissions)) return res.redirect('/selector');
+
+		const permissions = req.deserializePermissions(member.permissions);
+		const hasPermissions = req.dashboardConfig.permissions.every((p) => permissions[p] === true);
+
+		if (!hasPermissions) return res.redirect('/selector');
 
 		const errors = [];
 		Object.keys(req.body).forEach((item) => {
