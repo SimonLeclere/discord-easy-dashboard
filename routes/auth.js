@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const CheckAuth = (req, res, next) => req.session.user ? next() : res.status(401).redirect('/auth/login');
 const btoa = require('btoa');
-const fetch = require('node-fetch');
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Auth = Router()
@@ -15,7 +14,8 @@ const Auth = Router()
 				'redirect_uri',
 				`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`,
 			);
-			let response = await fetch('https://discord.com/api/oauth2/token', {
+
+			let response = await fetch('https://discord.com/api/v10/oauth2/token', {
 				method: 'POST',
 				body: params.toString(),
 				headers: {
@@ -25,6 +25,7 @@ const Auth = Router()
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 			});
+
 			// Fetch tokens (used to fetch user informations)
 			const tokens = await response.json();
 			// If the code isn't valid
@@ -37,7 +38,7 @@ const Auth = Router()
 			while (!userData.infos || !userData.guilds) {
 				/* User infos */
 				if (!userData.infos) {
-					response = await fetch('https://discord.com/api/users/@me', {
+					response = await fetch('https://discord.com/api/v10/users/@me', {
 						method: 'GET',
 						headers: { Authorization: `Bearer ${tokens.access_token}` },
 					});
@@ -47,7 +48,7 @@ const Auth = Router()
 				}
 				/* User guilds */
 				if (!userData.guilds) {
-					response = await fetch('https://discord.com/api/users/@me/guilds', {
+					response = await fetch('https://discord.com/api/v10/users/@me/guilds', {
 						method: 'GET',
 						headers: { Authorization: `Bearer ${tokens.access_token}` },
 					});
@@ -61,11 +62,12 @@ const Auth = Router()
 			req.session.user = Object.assign(userData.infos, {
 				guilds: Object.values(userData.guilds),
 			});
+
 			req.dashboardEmit('newUser', req.session.user);
 			res.status(200).redirect('/');
 		}
 		else {
-			res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`)}`);
+			res.redirect(`https://discord.com/api/v10/oauth2/authorize?client_id=${req.client?.user?.id}&scope=identify%20guilds&response_type=code&redirect_uri=${encodeURIComponent(`${req.dashboardConfig.baseUrl}${req.dashboardConfig.noPortIncallbackUrl ? '' : ':' + req.dashboardConfig.port}/auth/login`)}`);
 		}
 	})
 	.get('/logout', [CheckAuth], function(req, res) {

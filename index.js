@@ -5,7 +5,6 @@ const { existsSync, readdirSync } = require('fs');
 const { join } = require('path');
 const ejs = require('ejs');
 const { EventEmitter } = require('events');
-const { Permissions } = require('discord.js');
 
 class Dashboard extends EventEmitter {
 	constructor(client, options) {
@@ -38,6 +37,7 @@ class Dashboard extends EventEmitter {
 		this._commands = [];
 		this._settings = [];
 
+
 		this.config = {
 			baseUrl: options?.baseUrl || 'http://localhost',
 			port: options?.port || 3000,
@@ -46,7 +46,7 @@ class Dashboard extends EventEmitter {
 			logRequests: options?.logRequests || false,
 			injectCSS: options?.injectCSS || null,
 			theme: this._getTheme(options?.theme),
-			permissions: options?.permissions || [Permissions.FLAGS.MANAGE_GUILD],
+			permissions: options?.permissions || ['ManageGuild'],
 			session: options?.session || null,
 		};
 
@@ -82,6 +82,7 @@ class Dashboard extends EventEmitter {
 				cb(e, '');
 			}
 		});
+
 		if (this.details.faviconPath) this.app.use(favicon(this.details.faviconPath));
 		this.app.use(express.static(join(__dirname, 'public')));
 		this.app.use(express.json());
