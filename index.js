@@ -63,7 +63,7 @@ class Dashboard extends EventEmitter {
 	}
 
 	_getTheme(theme) {
-		if (!theme) require(join(__dirname, 'themes', 'light'));
+		if (!theme) return require(join(__dirname, 'themes', 'light'));
 		if (typeof theme === 'object') return theme;
 		if (!existsSync(join(__dirname, 'themes', theme))) throw new Error(`Theme ${theme} not found!`);
 		return require(join(__dirname, 'themes', theme));

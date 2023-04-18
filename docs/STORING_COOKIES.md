@@ -1,7 +1,10 @@
 # Storing cookies
+
 discord-easy-dashboard now supports custom cookies storage !
 It allows to store login informations, current settings, etc.
 You have to choose your storage system and implement it. This is a guide to make it easier.
+
+    /!\ This section of the documentation has been written for an older version of discord-easy-dashboard. The code may not work as expected. /!\
 
 ## Setting up
 
@@ -10,6 +13,7 @@ Here we will use Redis as a storage for cookies, but you can use any database yo
 1. Setup the Redis server on your PC. [Click here](https://www.google.com/search?q=How+to+install+redis+%3F) for help
 
 2. Install required dependencies using npm :
+
 ```bash
 npm i redis connect-redis
 ```
@@ -52,7 +56,7 @@ const sessionObject = {
 
 ```js
 client.dashboard = new Dashboard(client, {
-	// Other options
+ // Other options
     session: sessionObject,
 });
 ```
