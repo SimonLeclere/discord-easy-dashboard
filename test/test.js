@@ -22,7 +22,7 @@ client.dashboard = new Dashboard(client, {
 	secret: process.env.DISCORD_SECRET, // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
 	theme, // dark or light
 	logRequests: true,
-	permissions: ['IMPOSSIBLE'], // permissions needed to access the dashboard
+	permissions: ['ManageGuild'], // permissions needed to access the dashboard
 	faviconPath: join(__dirname, 'favicon.ico'), // path to the favicon
 });
 
@@ -56,7 +56,7 @@ client.dashboard.addColorInput('Color', 'The color of the embeds', setColor, get
 
 client.isMegamind = {};
 
-const setMegamind = (discordClient, guild, value) => (discordClient.isMegamind[guild.id] = value); // Stores the megamind in the client.isMegamind object
+const setMegamind = (discordClient, guild, value) => discordClient.isMegamind[guild.id] = value; // Stores the megamind in the client.isMegamind object
 const getMegamind = (discordClient, guild) => discordClient.isMegamind[guild.id] || false; // Get the megamind in the client.isMegamind object or give the default one
 client.dashboard.addBooleanInput('Megamind', 'The megamind', setMegamind, getMegamind);
 
