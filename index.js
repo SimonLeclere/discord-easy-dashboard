@@ -1,6 +1,9 @@
 const express = require('express');
 const session = require('express-session');
 const favicon = require('serve-favicon');
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
 const { existsSync, readdirSync } = require('fs');
 const { join } = require('path');
 const ejs = require('ejs');
@@ -191,7 +194,24 @@ class Dashboard extends EventEmitter {
 
 	_start() {
 		try {
-			this.app.listen(this.app.get('port'));
+
+			if (this.config.sslKey && this.config.sslCert) {
+				const httpsServer = https.createServer({
+					key: fs.readFileSync(this.config.sslKey), // path to the key
+					cert: fs.readFileSync(this.config.sslCert), // path to the cert
+				}, this.app);
+
+				httpsServer.listen(this.app.get('port'), () => {
+					console.log('Dashboard server listening on port ' + this.app.get('port'));
+				});
+			}
+			else {
+				const httpServer = http.createServer(this.app);
+				httpServer.listen(this.app.get('port'), () => {
+					console.log('Dashboard server listening on port ' + this.app.get('port'));
+				});
+			}
+
 		}
 		catch (e) {
 			throw new Error(e);

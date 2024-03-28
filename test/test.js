@@ -23,13 +23,15 @@ const Dashboard = require('..');
 		name: 'DashBot', // Bot's name
 		description: 'A super cool bot with an online dashboard!', // Bot's description
 		baseUrl: 'http://localhost', // Leave this if ur in local development
-		port: 80,
+		port: 2000,
 		noPortIncallbackUrl: false, // set it to true if you want to use the callback url without port (like if you are using repl.it)
 		secret: process.env.DISCORD_SECRET, // client.secret -> accessible at https://discord.com/developers/applications (OAuth2 section),
 		theme, // dark or light
 		logRequests: true,
 		permissions: ['ManageGuild'], // permissions needed to access the dashboard
 		faviconPath: buffer, // path to the favicon
+		key: null, // key for the session
+		cert: null, // cert for the session
 	});
 
 	// register command test

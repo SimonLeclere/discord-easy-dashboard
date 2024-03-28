@@ -33,6 +33,8 @@ At this point, the module will start the server at `http://localhost:3000` (defa
 - options.theme (string) : Can be either `light` (default) or `dark`, a path to a theme folder or an object, see [THEMING.md](THEMING.md) for further information.
 - options.permissions (object) : A list of permissions required to access the dashboard. Default value is `['ManageGuild']`.
 - options.session (object) : A session object to use instead of the default one, for storing cookies for example. Default value is null. See [STORING_COOKIES.md](STORING_COOKIES.md) for further information.
+- options.sslKey (string) : A path to the SSL key file. Default value is null.
+- options.sslCert (string) : A path to the SSL cert file. Default value is null.
 
 ## Important
 
